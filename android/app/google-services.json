@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "824666285542",
+    "project_id": "extilo-carioca",
+    "storage_bucket": "extilo-carioca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824666285542:android:eaa36a69e81073a02ca227",
+        "android_client_info": {
+          "package_name": "com.example.extilo_carioca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824666285542-10ohtuh0srt0keeibmavhki3ig7iqne8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn-Ii2y4Ho5vh_zYjq3X9yG4xR67wVg-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824666285542-10ohtuh0srt0keeibmavhki3ig7iqne8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
