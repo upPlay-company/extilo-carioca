@@ -219,9 +219,7 @@ class SignUpScreen extends StatelessWidget {
                                         width: 200,
                                         child: RaisedButton(
                                           onPressed: (){
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (context) => HomeScreen()
-                                            ));
+                                            Navigator.of(context).pushNamed('/base');
                                           },
                                           color: Theme.of(context).primaryColor,
                                           child: Text(

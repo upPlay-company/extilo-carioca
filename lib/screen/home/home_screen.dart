@@ -1,3 +1,4 @@
+import 'package:extilo_carioca/common/drawer/custom_drawer.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
+          iconTheme: new IconThemeData(color: Colors.black),
           title: Text('EXTILO CARIOCA',
             style: TextStyle(
               color: Colors.black,
@@ -29,6 +31,7 @@ class HomeScreen extends StatelessWidget {
             // TODO: ENDEREÇO
           ],
         ),
+        endDrawer: CustomDrawer(),
       ),
     );
   }
