@@ -1,3 +1,5 @@
+import 'package:extilo_carioca/screen/home/home_screen.dart';
+import 'package:extilo_carioca/screen/signup/signup_screen.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class LoginScreen extends StatelessWidget {
     return styleScreenPattern(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        key: formKey,
+        key: scaffoldKey,
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -41,7 +43,8 @@ class LoginScreen extends StatelessWidget {
                                   'Login',
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 22
+                                      fontSize: 25,
+                                      fontFamily: 'Principal'
                                   ),
                                 ),
                               ),
@@ -75,7 +78,8 @@ class LoginScreen extends StatelessWidget {
                                         labelText: 'Email',
                                         labelStyle: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.black
+                                          color: Colors.black,
+                                            fontFamily: 'Principal'
                                         )
                                       ),
                                     ),
@@ -97,7 +101,8 @@ class LoginScreen extends StatelessWidget {
                                           labelText: 'Senha',
                                           labelStyle: TextStyle(
                                               fontSize: 15,
-                                              color: Colors.black
+                                              color: Colors.black,
+                                              fontFamily: 'Principal'
                                           )
                                       ),
                                     ),
@@ -113,7 +118,8 @@ class LoginScreen extends StatelessWidget {
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 18,
-                                            fontWeight: FontWeight.bold
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Principal'
                                         ),
                                       ),
                                     ),
@@ -143,7 +149,8 @@ class LoginScreen extends StatelessWidget {
                                             style: TextStyle(
                                               color: Theme.of(context).primaryColor,
                                               fontSize: 18,
-                                              fontWeight: FontWeight.bold
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Principal'
                                             ),
                                           )
                                         ],
@@ -157,14 +164,19 @@ class LoginScreen extends StatelessWidget {
                                         height: 54,
                                         width: 200,
                                         child: RaisedButton(
-                                          onPressed: (){},
+                                          onPressed: (){
+                                            Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) => HomeScreen()
+                                            ));
+                                          },
                                           color: Theme.of(context).primaryColor,
                                           child: Text(
                                             'Concluir',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w700,
-                                              fontSize: 20
+                                              fontSize: 20,
+                                              fontFamily: 'Principal'
                                             ),
                                           ),
                                           shape: RoundedRectangleBorder(
@@ -176,7 +188,9 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: (){
-                                      // TODO: IMPLEMENTAR ESQUECEU SENHA
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => SignUpScreen()
+                                      ));
                                     },
                                     child: Padding(
                                       padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -188,7 +202,8 @@ class LoginScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.bold
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Principal'
                                             ),
                                           ),
                                           Text(
@@ -196,7 +211,8 @@ class LoginScreen extends StatelessWidget {
                                             style: TextStyle(
                                                 color: Theme.of(context).primaryColor,
                                                 fontSize: 18,
-                                                fontWeight: FontWeight.bold
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Principal'
                                             ),
                                           )
                                         ],
