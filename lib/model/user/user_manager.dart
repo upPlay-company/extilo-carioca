@@ -25,7 +25,7 @@ class UserManager extends ChangeNotifier {
     loading = true;
     try {
       final UserCredential result = await auth.signInWithEmailAndPassword(
-          email: user.email, password: user.password
+          email: user.email, password: user.password,
       );
 
       await _loadCurrentUser(firebaseUser: result.user);
