@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:extilo_carioca/helpers/validators.dart';
 import 'package:extilo_carioca/model/user/user.dart';
 import 'package:extilo_carioca/model/user/user_manager.dart';
@@ -16,8 +15,6 @@ class SignUpScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final UserUser user = UserUser();
-
-  Timestamp nasc;
 
   @override
   Widget build(BuildContext context) {

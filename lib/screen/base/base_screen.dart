@@ -1,3 +1,4 @@
+import 'package:extilo_carioca/model/home/section_banners.dart';
 import 'package:extilo_carioca/model/page/page_manager.dart';
 import 'package:extilo_carioca/screen/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';

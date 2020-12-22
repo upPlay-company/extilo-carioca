@@ -14,6 +14,7 @@ class _InicialScreenState extends State<InicialScreen> {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     Future.delayed(Duration(seconds: 4)).then((_){
+      // TODO: VERIFICAR USUARIO LOGADO
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
     });
   }

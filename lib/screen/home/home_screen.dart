@@ -1,6 +1,10 @@
 import 'package:extilo_carioca/common/drawer/custom_drawer.dart';
+import 'package:extilo_carioca/model/home/banners_manager.dart';
+import 'package:extilo_carioca/screen/home/components/banners_tile.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -23,12 +27,261 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        body: ListView(
-          children: [
-            // TODO: CORROSEL BANNERS
-            // TODO: LISTA DE ICONES OPÇÕES
-            // TODO: FACEBOOK E INSTAGRAM
-            // TODO: ENDEREÇO
+        body: CustomScrollView(
+          slivers: [
+            Consumer<BannersManager>(
+              builder: (_, bannersManager, __) {
+                if(bannersManager.loading) {
+                  return SliverToBoxAdapter(
+                    child: LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(Colors.black),
+                      backgroundColor: Colors.transparent,
+                    ),
+                  );
+                }
+                final List<Widget> children =
+                bannersManager.banners.map<Widget>((banners) {
+                  return BannersTile(banners);
+                }).toList();
+                return SliverList(
+                  delegate: SliverChildListDelegate(children),
+                );
+              },
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){},
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(20)
+                                ),
+                                child: Container(
+                                  child: Icon(
+                                    Icons.calendar_today,
+                                    size: 45,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              'AGENDAR',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){},
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius: BorderRadius.circular(20)
+                                ),
+                                child: Container(
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 45,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              'PROSSIONAIS',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){},
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(20)
+                                ),
+                                child: Container(
+                                  child: Icon(
+                                    Icons.backpack,
+                                    size: 45,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              'PACOTES',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){},
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(20)
+                                ),
+                                child: Container(
+                                  child: Icon(
+                                    Icons.local_offer,
+                                    size: 45,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              'SERVIÇOS',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ]
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                // TODO: API FACEBOOK
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        image: AssetImage('images/Icone face.png')
+                                    )
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                // TODO: API INSTAGRAM
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: AssetImage('images/icone insta.png')
+                                    )
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        'Rua Dom Pedro II, 2550, Porto Velho',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                )
+              ),
+            )
           ],
         ),
         endDrawer: CustomDrawer(),

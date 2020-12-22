@@ -1,3 +1,5 @@
+import 'package:extilo_carioca/model/home/banners_manager.dart';
+import 'package:extilo_carioca/model/home/section_banners.dart';
 import 'package:extilo_carioca/model/user/user_manager.dart';
 import 'package:extilo_carioca/screen/base/base_screen.dart';
 import 'package:extilo_carioca/screen/inicial/inicial_screen.dart';
@@ -17,6 +19,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => BannersManager(),
+          lazy: false,
+        ),
         ChangeNotifierProvider(
           create: (_) => UserManager(),
           lazy: false,
