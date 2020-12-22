@@ -4,6 +4,7 @@ import 'package:extilo_carioca/model/user/user_manager.dart';
 import 'package:extilo_carioca/screen/base/base_screen.dart';
 import 'package:extilo_carioca/screen/inicial/inicial_screen.dart';
 import 'package:extilo_carioca/screen/login/login_screen.dart';
+import 'package:extilo_carioca/screen/servicos/servico_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,10 @@ class MyApp extends StatelessWidget {
         initialRoute: 'inicial',
         onGenerateRoute: (settings){
           switch(settings.name){
+            case '/servicos':
+              return MaterialPageRoute(
+                  builder: (_) => ServicoScreen()
+              );
             case '/login':
               return MaterialPageRoute(
                 builder: (_) => LoginScreen()

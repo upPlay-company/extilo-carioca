@@ -64,15 +64,10 @@ class HomeScreen extends StatelessWidget {
                                 height: 80,
                                 width: 80,
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Container(
-                                  child: Icon(
-                                    Icons.calendar_today,
-                                    size: 45,
-                                    color: Colors.black,
-                                  ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: AssetImage('images/Agendar 3.png')
+                                    )
                                 ),
                               ),
                             ),
@@ -100,18 +95,13 @@ class HomeScreen extends StatelessWidget {
                                 height: 80,
                                 width: 80,
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
-                                  borderRadius: BorderRadius.circular(20)
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image: AssetImage('images/Profissionais.png')
+                                  )
                                 ),
-                                child: Container(
-                                  child: Icon(
-                                    Icons.person,
-                                    size: 45,
-                                    color: Colors.black,
-                                  ),
                                 ),
                               ),
-                            ),
                             SizedBox(height: 5,),
                             Text(
                               'PROSSIONAIS',
@@ -145,15 +135,10 @@ class HomeScreen extends StatelessWidget {
                                 height: 80,
                                 width: 80,
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Container(
-                                  child: Icon(
-                                    Icons.backpack,
-                                    size: 45,
-                                    color: Colors.black,
-                                  ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: AssetImage('images/Pacotes.png')
+                                    )
                                 ),
                               ),
                             ),
@@ -176,20 +161,17 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             GestureDetector(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.of(context).pushNamed('/servicos');
+                              },
                               child: Container(
                                 height: 80,
                                 width: 80,
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Container(
-                                  child: Icon(
-                                    Icons.local_offer,
-                                    size: 45,
-                                    color: Colors.black,
-                                  ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: AssetImage('images/Creditos.png')
+                                    )
                                 ),
                               ),
                             ),
