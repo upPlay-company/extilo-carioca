@@ -17,7 +17,7 @@ class ServiceManager extends ChangeNotifier {
 
   Future<void> _loadServices() async {
     final QuerySnapshot snapServicos =
-    await firestore.collection('services').get();
+    await firestore.collection('servicos').get();
 
     _servicos = snapServicos.docs.map(
             (s) => Servicos.fromDocument(s)).toList();

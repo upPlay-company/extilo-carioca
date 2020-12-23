@@ -12,8 +12,8 @@ class Servicos extends ChangeNotifier {
   Servicos.fromDocument(DocumentSnapshot document){
     id = document.id;
     name = document.data()['name'] as String;
-    price = document.data()['price'] as Float;
-    duracao = document.data()['duracao'] as int;
+    price = document.data()['price'] as int;
+    duracao = document.data()['duracao'] as String;
     img = List<String>.from(document.data()['img'] as List<dynamic>);
   }
 
@@ -25,8 +25,8 @@ class Servicos extends ChangeNotifier {
 
   String id;
   String name;
-  Float price;
-  int duracao;
+  int price;
+  String duracao;
   List<String> img;
 
 }
