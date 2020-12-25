@@ -2,6 +2,8 @@ import 'package:extilo_carioca/screen/servicos/lista_servicos/lista_all_servicos
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 
+import 'lista_produtos/lista_all_produtos_screen.dart';
+
 class ServicoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,10 @@ class ServicoScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
               child: GestureDetector(
                 onTap: (){
-
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => ListAllProduct()
+                  )
+                  );
                 },
                 child: Card(
                   shape: RoundedRectangleBorder(

@@ -2,30 +2,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
-class Servicos extends ChangeNotifier {
+class Product extends ChangeNotifier {
 
-  Servicos({this.img}){
+  Product({this.img}){
     img = img ?? [];
   }
 
-  Servicos.fromDocument(DocumentSnapshot document){
+  Product.fromDocument(DocumentSnapshot document){
     id = document.id;
     name = document.data()['name'] as String;
-    price = document.data()['price'] as int;
-    duracao = document.data()['duracao'] as String;
+    description = document.data()['description'] as String;
     img = List<String>.from(document.data()['img'] as List<dynamic>);
-  }
+    price = document.data()['price'] as int;
+}
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
 
-  DocumentReference get firestoreRef => firestore.doc('servicos/$id');
-  get storageRef => storage.ref().child('servicos/$id');
+  DocumentReference get firestoreRef => firestore.doc('produtos/$id');
+  get storageRef => storage.ref().child('produtos/$id');
 
   String id;
   String name;
-  int price;
-  String duracao;
+  String description;
   List<String> img;
+  int price;
 
 }

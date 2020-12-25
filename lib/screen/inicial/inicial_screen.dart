@@ -23,6 +23,7 @@ class _InicialScreenState extends State<InicialScreen> {
   }
 }
 
+// ignore: non_constant_identifier_names
 Widget _Telalogin() {
   return Stack(
     children: <Widget>[
@@ -52,6 +53,7 @@ Widget _Telalogin() {
   );
 }
 
+// ignore: non_constant_identifier_names
 Widget _TelaHome() {
   return Stack(
     children: <Widget>[

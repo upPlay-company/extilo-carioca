@@ -2,7 +2,6 @@ import 'package:extilo_carioca/model/servicos/service_manager.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'components/service_list_tile.dart';
 
 class ListAllServicos extends StatelessWidget {
