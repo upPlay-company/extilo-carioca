@@ -1,7 +1,6 @@
 import 'package:extilo_carioca/screen/servicos/lista_servicos/lista_all_servicos_screen.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
-
 import 'lista_produtos/lista_all_produtos_screen.dart';
 
 class ServicoScreen extends StatelessWidget {
@@ -16,7 +15,7 @@ class ServicoScreen extends StatelessWidget {
           title: Text('EXTILO CARIOCA',
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 30,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Principal'
             ),

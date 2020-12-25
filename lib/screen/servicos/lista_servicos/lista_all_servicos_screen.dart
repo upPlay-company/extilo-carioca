@@ -16,7 +16,7 @@ class ListAllServicos extends StatelessWidget {
           title: Text('SERVIÇOS',
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 30,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Principal'
             ),

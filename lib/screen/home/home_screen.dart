@@ -90,7 +90,9 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             GestureDetector(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.of(context).pushNamed('/profissionais');
+                              },
                               child: Container(
                                 height: 80,
                                 width: 80,
@@ -194,7 +196,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.only(top: 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -232,7 +234,6 @@ class HomeScreen extends StatelessWidget {
                                 height: 40,
                                 width: 40,
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
                                       image: AssetImage('images/icone insta.png')
@@ -247,23 +248,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                        'Rua Dom Pedro II, 2550, Porto Velho',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ],
-                )
-              ),
-            )
           ],
         ),
         endDrawer: CustomDrawer(),
