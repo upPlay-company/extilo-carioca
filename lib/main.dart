@@ -12,6 +12,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'model/unidades/unidades_manager.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -41,6 +43,10 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ProfissionaisManager(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UnidadesManager(),
           lazy: false,
         )
       ],

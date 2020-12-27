@@ -1,5 +1,6 @@
 import 'package:extilo_carioca/model/page/page_manager.dart';
 import 'package:extilo_carioca/screen/home/home_screen.dart';
+import 'package:extilo_carioca/screen/unidades/unidades_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +20,7 @@ class BaseScreen extends StatelessWidget {
           HomeScreen(),
           Container(),
           Container(),
-          Container(),
-          Container(),
+          UnidadesScreen(),
           Container(),
         ],
       ),

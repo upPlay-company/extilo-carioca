@@ -34,19 +34,14 @@ class CustomDrawer extends StatelessWidget {
                         page: 2
                     ),
                     DrawerTile(
-                        iconData: Icons.call,
-                        title: 'Contatos',
+                        iconData: Icons.location_on,
+                        title: 'Unidades',
                         page: 3
                     ),
                     DrawerTile(
                         iconData: Icons.person_outline,
                         title: 'Minha Conta',
                         page: 4
-                    ),
-                    DrawerTile(
-                        iconData: Icons.location_on,
-                        title: 'Endereço',
-                        page: 5
                     ),
                     SizedBox(height: 10,),
                     Divider(),
