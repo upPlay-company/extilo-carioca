@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 class InicialScreen extends StatefulWidget {
+
   @override
   _InicialScreenState createState() => _InicialScreenState();
 }
 
 class _InicialScreenState extends State<InicialScreen> {
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserManager>(context);

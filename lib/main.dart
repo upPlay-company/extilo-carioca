@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'model/unidades/unidades_manager.dart';
+import 'model/user/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -4,6 +4,7 @@ import 'package:extilo_carioca/screen/home/components/banners_tile.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -206,7 +207,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                // TODO: API FACEBOOK
+                                launch('https://www.facebook.com/ExtiloCarioca/');
                               },
                               child: Container(
                                 height: 40,
@@ -228,7 +229,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                // TODO: API INSTAGRAM
+                                launch('https://www.instagram.com/extilocarioca/');
                               },
                               child: Container(
                                 height: 40,

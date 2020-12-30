@@ -57,7 +57,7 @@ class TelaProfissionaisScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(20)
                       ),
-                      height: 50,
+                      height: 55,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
