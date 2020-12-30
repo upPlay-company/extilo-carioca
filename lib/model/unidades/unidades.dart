@@ -15,6 +15,7 @@ class Unidades extends ChangeNotifier {
     lat = document.data()['lat'] as double;
     long = document.data()['long'] as double;
     phone = document.data()['phone'] as String;
+    whatsapp = document.data()['whatsapp'] as String;
     img = List<String>.from(document.data()['img'] as List<dynamic>);
   }
 
@@ -30,6 +31,7 @@ class Unidades extends ChangeNotifier {
   double lat;
   double long;
   String phone;
+  String whatsapp;
   List<String> img;
 
 }

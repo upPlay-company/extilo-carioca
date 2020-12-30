@@ -1,5 +1,6 @@
 import 'package:extilo_carioca/model/unidades/unidades.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UnidadesListTile extends StatelessWidget {
@@ -50,27 +51,29 @@ class UnidadesListTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               FlatButton(
-                child: Text("WhatsApp"),
-                textColor: Colors.blue,
+                textColor: Colors.green,
+                child: Icon(LineIcons.whatsapp),
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                 // TODO: API WHATS
+                  // TODO: VERIFICAR NO CELL REAL
+                 launch("whatsapp://send?phone=${unidades.whatsapp}&text=Olá,tudo bem ?");
                 },
               ),
               FlatButton(
-                child: Text("Ver no Mapa"),
-                textColor: Colors.blue,
+                child: Icon(LineIcons.map),
+                textColor: Theme.of(context).primaryColor,
                 padding: EdgeInsets.zero,
-                onPressed: (){
-                  // TODO: API MAPS
+                onPressed: () async {
+                  launch("https://www.google.com/maps/search/?api=1&query=${unidades.lat},"
+                      "${unidades.long}");
                 },
               ),
               FlatButton(
-                child: Text("Ligar"),
-                textColor: Colors.blue,
+                child: Icon(LineIcons.phone),
+                textColor: Theme.of(context).primaryColor,
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  // TODO: API PHONE
+                  launch("tel:${unidades.phone}");
                 },
               )
             ],
@@ -78,25 +81,5 @@ class UnidadesListTile extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  abrirGoogleMaps() async {
-    const urlMap =
-        "https://www.google.com/maps/search/?api=1&query=-22.9732303,-43.2032649";
-    if (await canLaunch(urlMap)) {
-      await launch(urlMap);
-    } else {
-      throw 'Could not launch Maps';
-    }
-  }
-
-  abrirWhatsApp() async {
-    var whatsappUrl = "whatsapp://send?phone=+55993686938&text=Olá,tudo bem ?";
-
-    if (await canLaunch(whatsappUrl)) {
-      await launch(whatsappUrl);
-    } else {
-      throw 'Could not launch $whatsappUrl';
-    }
   }
 }
