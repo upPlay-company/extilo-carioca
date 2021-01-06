@@ -278,9 +278,13 @@ class SignUpScreen extends StatelessWidget {
                                                     scaffoldKey.currentState.showSnackBar(
                                                       SnackBar(
                                                         content: const Text('Senhas não coincidem!',
-                                                             style: TextStyle(fontSize: 16, color: Colors.red),
+                                                             style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                                                         ),
-                                                        backgroundColor: Colors.black,
+                                                        backgroundColor: Colors.blue,
+                                                        behavior: SnackBarBehavior.floating,
+                                                        margin: EdgeInsets.all(16),
+                                                        duration: Duration(seconds: 2),
+                                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                                                       ),
                                                     );
                                                     return;
@@ -294,9 +298,13 @@ class SignUpScreen extends StatelessWidget {
                                                       scaffoldKey.currentState.showSnackBar(
                                                         SnackBar(
                                                           content: Text('Falha ao cadastrar: $e',
-                                                            style: TextStyle(fontSize: 16, color: Colors.red),
+                                                            style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                                                           ),
-                                                          backgroundColor: Colors.black,
+                                                          backgroundColor: Colors.blue,
+                                                          behavior: SnackBarBehavior.floating,
+                                                          margin: EdgeInsets.all(16),
+                                                          duration: Duration(seconds: 2),
+                                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                                                         )
                                                       );
                                                     }

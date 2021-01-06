@@ -193,8 +193,13 @@ class LoginScreen extends StatelessWidget {
                                                       onFail: (e){
                                                         scaffoldKey.currentState.showSnackBar(
                                                           SnackBar(
-                                                            content: Text('Falha ao entrar: $e'),
-                                                            backgroundColor: Colors.red,
+                                                            content: Text('Falha ao entrar: $e',
+                                                                style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),),
+                                                            backgroundColor: Colors.blue,
+                                                            behavior: SnackBarBehavior.floating,
+                                                            margin: EdgeInsets.all(16),
+                                                            duration: Duration(seconds: 2),
+                                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                                                           )
                                                         );
                                                       },

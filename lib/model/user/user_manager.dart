@@ -85,4 +85,8 @@ class UserManager extends ChangeNotifier {
     allUser.add(user);
     notifyListeners();
   }
+
+  void updatePasswod(User user){
+
+  }
 }

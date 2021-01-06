@@ -3,6 +3,7 @@ import 'package:extilo_carioca/helpers/validators.dart';
 import 'package:extilo_carioca/model/user/user_manager.dart';
 import 'package:extilo_carioca/screen/minhaconta/alterar_senha_screen.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +14,13 @@ class MinhaContaScreen extends StatelessWidget {
   static final _UsNumberTextInputFormatter2 _numberTextInputFormatter = new _UsNumberTextInputFormatter2();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return styleScreenPattern(
       child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           centerTitle: true,
@@ -175,12 +178,23 @@ class MinhaContaScreen extends StatelessWidget {
                                       if(formKey.currentState.validate()){
                                         formKey.currentState.save();
                                         await userManager.user.save();
-                                        Navigator.of(context).pushNamed('/base');
+                                        scaffoldKey.currentState.showSnackBar(
+                                          SnackBar(
+                                            content: const Text('Cadastro atualizado com sucesso!',
+                                              style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                                            ),
+                                            backgroundColor: Colors.blue,
+                                            behavior: SnackBarBehavior.floating,
+                                            margin: EdgeInsets.all(16),
+                                            duration: Duration(seconds: 2),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                                          ),
+                                        );
                                         context.read<UserManager>().update(userManager.user);
                                       }
                                   } : null,
                                   color: Theme.of(context).primaryColor,
-                                  child: userManager.loading ?
+                                  child: userManager.user.loading ?
                                   const CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation(Colors.white),
                                   ) : Text(

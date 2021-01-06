@@ -122,7 +122,9 @@ class AlterarSenhaScreen extends StatelessWidget {
                                 height: 54,
                                 width: 200,
                                 child: RaisedButton(
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    // TODO: METODO DE ALTERAR SENHA USER
+                                  },
                                   color: Theme.of(context).primaryColor,
                                   child: userManager.loading ?
                                   const CircularProgressIndicator(
