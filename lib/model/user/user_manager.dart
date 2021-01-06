@@ -16,6 +16,8 @@ class UserManager extends ChangeNotifier {
 
   UserUser user;
 
+  List<UserUser> allUser = [];
+
   bool _loading = false;
   bool get loading => _loading;
 
@@ -76,5 +78,11 @@ class UserManager extends ChangeNotifier {
       user = UserUser.fromDocument(docUser);
       notifyListeners();
     }
+  }
+
+  void update(UserUser user){
+    allUser.removeWhere((u) => u.id == user.id);
+    allUser.add(user);
+    notifyListeners();
   }
 }

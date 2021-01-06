@@ -174,7 +174,6 @@ class SignUpScreen extends StatelessWidget {
                                       Padding(
                                         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                                         child: TextFormField(
-                                          keyboardType: TextInputType.emailAddress,
                                           autocorrect: false,
                                           obscureText: true,
                                           enabled: !userManager.loading,
@@ -205,7 +204,6 @@ class SignUpScreen extends StatelessWidget {
                                       Padding(
                                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                                         child: TextFormField(
-                                          keyboardType: TextInputType.emailAddress,
                                           autocorrect: false,
                                           obscureText: true,
                                           enabled: !userManager.loading,
