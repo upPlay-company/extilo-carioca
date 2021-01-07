@@ -190,22 +190,23 @@ class LoginScreen extends StatelessWidget {
                                                           email: emailController.text,
                                                           password: passController.text
                                                       ),
-                                                      onFail: (e){
-                                                        scaffoldKey.currentState.showSnackBar(
-                                                          SnackBar(
-                                                            content: Text('Falha ao entrar: $e',
-                                                                style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),),
-                                                            backgroundColor: Colors.blue,
-                                                            behavior: SnackBarBehavior.floating,
-                                                            margin: EdgeInsets.all(16),
-                                                            duration: Duration(seconds: 2),
-                                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                                                          )
-                                                        );
-                                                      },
+                                                       onFail: (e){
+                                                          scaffoldKey.currentState.showSnackBar(
+                                                              SnackBar(
+                                                                content: Text('Falha no login: $e',
+                                                                style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                                                                ),
+                                                                backgroundColor: Colors.blue,
+                                                                behavior: SnackBarBehavior.floating,
+                                                                margin: EdgeInsets.all(16),
+                                                                duration: Duration(seconds: 2),
+                                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                                                              )
+                                                          );
+                                                        },
                                                       onSuccess: (){
                                                         Navigator.of(context).pushNamed('/base');
-                                                      }
+                                                      },
                                                     );
                                                   }
                                                 },

@@ -11,9 +11,7 @@ import 'package:extilo_carioca/screen/servicos/servico_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'model/unidades/unidades_manager.dart';
-import 'model/user/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

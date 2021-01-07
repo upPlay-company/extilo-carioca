@@ -3,7 +3,6 @@ import 'package:extilo_carioca/helpers/firebase.error.dart';
 import 'package:extilo_carioca/model/user/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 
 class UserManager extends ChangeNotifier {
 
@@ -27,14 +26,16 @@ class UserManager extends ChangeNotifier {
     loading = true;
     try {
       final UserCredential result = await auth.signInWithEmailAndPassword(
-          email: user.email, password: user.password,
+        email: user.email,
+        password: user.password,
       );
 
       await _loadCurrentUser(firebaseUser: result.user);
 
       onSuccess();
-    } on PlatformException catch (e){
+    } on FirebaseAuthException catch (e){
       onFail(getErrorString(e.code));
+      print(e);
     }
 
     loading = false;
@@ -53,8 +54,9 @@ class UserManager extends ChangeNotifier {
       await user.saveData();
 
       onSuccess();
-    } on PlatformException catch (e){
+    } on FirebaseAuthException catch (e){
       onFail(getErrorString(e.code));
+      print(e);
     }
     loading = false;
   }

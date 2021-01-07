@@ -1,22 +1,22 @@
 String getErrorString(String code){
   switch (code) {
-    case 'ERROR_WEAK_PASSWORD':
+    case 'weak_password':
       return 'Sua senha é muito fraca.';
-    case 'ERROR_INVALID_EMAIL':
+    case 'user-not-found':
       return 'Seu e-mail é inválido.';
-    case 'ERROR_EMAIL_ALREADY_IN_USE':
+    case 'email_already_in_user':
       return 'E-mail já está sendo utilizado em outra conta.';
-    case 'ERROR_INVALID_CREDENTIAL':
+    case 'invalid_credential':
       return 'Seu e-mail é inválido.';
-    case 'ERROR_WRONG_PASSWORD':
+    case 'wrong-password':
       return 'Sua senha está incorreta.';
-    case 'ERROR_USER_NOT_FOUND':
+    case 'user_not_found':
       return 'Não há usuário com este e-mail.';
-    case 'ERROR_USER_DISABLED':
+    case 'user_disabled':
       return 'Este usuário foi desabilitado.';
-    case 'ERROR_TOO_MANY_REQUESTS':
+    case 'network-request-failed':
       return 'Muitas solicitações. Tente novamente mais tarde.';
-    case 'ERROR_OPERATION_NOT_ALLOWED':
+    case 'operation_not_allowed':
       return 'Operação não permitida.';
 
     default:
