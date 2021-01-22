@@ -12,14 +12,7 @@ class UserUser extends ChangeNotifier {
     phone = document.data()['phone'] as String;
   }
 
-  String id;
-  String name;
-  String email;
-  String password;
-  String datanasc;
-  String phone;
-
-  String confirmPassword;
+  String id, name, email, password, datanasc, phone, teste, confirmPassword, newPass;
 
   DocumentReference get firestoreRef =>
       FirebaseFirestore.instance.doc('users/$id');
@@ -64,5 +57,6 @@ class UserUser extends ChangeNotifier {
 
     loading = false;
   }
+
 
 }

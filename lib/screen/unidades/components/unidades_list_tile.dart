@@ -41,7 +41,7 @@ class UnidadesListTile extends StatelessWidget {
                   unidades.address,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    fontFamily: 'Principal'
+                      fontFamily: 'Principal'
                   ),
                 )
               ],
@@ -56,7 +56,9 @@ class UnidadesListTile extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 onPressed: (){
                   // TODO: VERIFICAR NO CELL REAL
-                 launch("whatsapp://send?phone=${unidades.whatsapp}&text=Olá,tudo bem ?");
+                  dynamic main;
+                  main = launch("whatsapp://send?phone=${unidades.whatsapp}&text=Olá,tudo bem ?");
+                  print(main);
                 },
               ),
               FlatButton(

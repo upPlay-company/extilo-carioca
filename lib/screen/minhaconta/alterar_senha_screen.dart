@@ -3,9 +3,33 @@ import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+
 class AlterarSenhaScreen extends StatelessWidget {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController passController = TextEditingController();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+
+  //Declarações de funções
+  Widget _snackBarNewPss(String msgRecovery, dynamic scaffoldKey) {
+    return scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        msgRecovery,
+        style: TextStyle(
+            fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: Colors.blue,
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.all(16),
+      duration: Duration(seconds: 2),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+    ));
+  }
+
+
+  //Fim Declarações de funções
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +86,7 @@ class AlterarSenhaScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFormField(
+                            controller: passController,
                             autocorrect: false,
                             obscureText: true,
                             validator: (pass) {
@@ -122,8 +147,9 @@ class AlterarSenhaScreen extends StatelessWidget {
                                 height: 54,
                                 width: 200,
                                 child: RaisedButton(
-                                  onPressed: (){
-                                    // TODO: METODO DE ALTERAR SENHA USER
+                                  onPressed: () {
+                                    userManager.newPass(passController.text);
+
                                   },
                                   color: Theme.of(context).primaryColor,
                                   child: userManager.loading ?
