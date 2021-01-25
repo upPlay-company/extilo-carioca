@@ -1,7 +1,6 @@
 import 'package:extilo_carioca/common/drawer/custom_drawer.dart';
 import 'package:extilo_carioca/helpers/validators.dart';
 import 'package:extilo_carioca/model/user/user_manager.dart';
-import 'package:extilo_carioca/screen/minhaconta/alterar_senha_screen.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -214,30 +213,6 @@ class MinhaContaScreen extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          ),
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => AlterarSenhaScreen()
-                              ));
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Alterar Senha',
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Principal'
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
                           ),
                         ],
                       ),
