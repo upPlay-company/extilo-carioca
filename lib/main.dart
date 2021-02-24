@@ -7,11 +7,11 @@ import 'package:extilo_carioca/screen/base/base_screen.dart';
 import 'package:extilo_carioca/screen/inicial/inicial_screen.dart';
 import 'package:extilo_carioca/screen/login/login_screen.dart';
 import 'package:extilo_carioca/screen/profissionais/profissionais_screen.dart';
-import 'package:extilo_carioca/screen/servicos/servico_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model/unidades/unidades_manager.dart';
+import 'screen/agendamento/agendamento.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
               );
             case '/servicos':
               return MaterialPageRoute(
-                  builder: (_) => ServicoScreen()
+                  builder: (_) => SchedulingScreen()
               );
             case '/login':
               return MaterialPageRoute(
