@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 //Variaveis Globais
 final Color primaryColor = Color(0xff078c9f);
-String url = "https://media-exp1.licdn.com/dms/image/C560BAQHMnA03XDdf3w/company-logo_200_200/0/1519855918965?e=2159024400&v=beta&t=CrP5Le1mWICRcaxIGNBuajHcHGFPuyNA5C8DI339lSk";
 
 class SchedulingScreen extends StatefulWidget {
   @override
@@ -11,9 +10,9 @@ class SchedulingScreen extends StatefulWidget {
 }
 
 class _SchedulingScreenState extends State<SchedulingScreen> {
-
   double whiteMargin = 2.5;
   double imageMargin = 4.0;
+  double schedulingPadding = 20;
 
   @override
   Widget build(BuildContext context) {
@@ -23,75 +22,82 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
           appBar: AppBar(
             centerTitle: true,
             iconTheme: new IconThemeData(color: Colors.black),
-            title: Text('EXTILO CARIOCA',
+            title: Text(
+              'EXTILO CARIOCA',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Principal'
-              ),
+                  fontFamily: 'Principal'),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          body: SingleChildScrollView(
-            child: Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  width: MediaQuery.of(context).size.width,
+          body: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.5,
+                  left: 12,
+                  right: 12,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 310,
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 20.0,
-                            left: 20,
-                            right: 20,
-                          ),
-                          child: Center(
-                            child: Expanded(
-                              child: Column(
-                                children: [
-                                  scheduling(
-                                    "Serviço", Icons.cut,
-                                    showModal: _showModalData
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: schedulingPadding,
+                          left: schedulingPadding,
+                          right: schedulingPadding,
+                        ),
+                        child: Center(
+                          child: Expanded(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 35,
+                                  child: Text(
+                                    "Agende seu horario",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  scheduling(
-                                    "Barbeiro", Icons.account_circle,
-                                    showModal: _showModalProfissional,
-                                  ),
-                                  scheduling(
-                                    "Data e Hora", Icons.date_range,
-                                    showModal: _showModalProfissional,
-                                  ),
-                                  styleButton(),
-                                ],
-                              ),
+                                ),
+                                scheduling("Serviço", Icons.cut,
+                                    showModal: _showModalProfissional),
+                                scheduling(
+                                  "Barbeiro",
+                                  Icons.account_circle,
+                                  showModal: _showModalBarber,
+                                ),
+                                scheduling(
+                                  "Data e Hora",
+                                  Icons.date_range,
+                                  showModal: _showModalDate,
+                                ),
+                                styleButton(),
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ), //Padding do agendamento
+                    ],
                   ),
                 ),
-              ],
-            ),
-          )
-      ),
+              ),
+            ],
+          )),
     );
   }
 
@@ -99,7 +105,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
 
   Widget styleButton() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 20.0),
       child: SizedBox(
         width: 120,
         height: 50,
@@ -115,21 +121,30 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
           ),
           decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20)
-          ),
+              borderRadius: BorderRadius.circular(20)),
         ),
       ),
     );
   }
 
-  void _showModalData() {
+  void _showModalDate() {
     showModalBottomSheet<void>(
       backgroundColor: Colors.black,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return Container(
-        );
+        return modelContainer();
+      },
+    );
+  }
+
+  void _showModalBarber() {
+    showModalBottomSheet<void>(
+      backgroundColor: Colors.black,
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return modelContainer();
       },
     );
   }
@@ -140,30 +155,34 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20)
-          ),
-        );
+        return modelContainer();
       },
     );
   }
 
+  Container modelContainer({Widget child}){
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.6,
+      color: Colors.black54,
+    );
+  }
+
   //Função Scheduling recebe parametros opcional, você passa uma rota ou passa uma função
-  Widget scheduling(String title, IconData icon, {Widget rota, Function showModal}) {
+  Widget scheduling(String title, IconData icon,
+      {Widget rota, Function showModal}) {
     return GestureDetector(
       onTap: showModal ??
-              () {
+          () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => rota),
             );
           },
       child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)
-        ),
         child: Container(
-          color: Colors.white,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(60),
+            color: Colors.white,
+          ),
           height: 60,
           child: Row(
             children: [
@@ -174,15 +193,12 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                      title,
+                  child: Text(title,
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Principal',
                           fontSize: 18,
-                          fontWeight: FontWeight.w800
-                      )
-                  ),
+                          fontWeight: FontWeight.w800)),
                 ),
               ),
             ],
@@ -191,8 +207,4 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
       ),
     );
   }
-
-
-
 }
-
