@@ -3,18 +3,17 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 class Product extends ChangeNotifier {
-
-  Product({this.img}){
+  Product({this.img}) {
     img = img ?? [];
   }
 
-  Product.fromDocument(DocumentSnapshot document){
+  Product.fromDocument(DocumentSnapshot document) {
     id = document.id;
     name = document.data()['name'] as String;
     description = document.data()['description'] as String;
     img = List<String>.from(document.data()['img'] as List<dynamic>);
     price = document.data()['price'] as int;
-}
+  }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
@@ -28,4 +27,8 @@ class Product extends ChangeNotifier {
   List<String> img;
   int price;
 
+  @override
+  String toString() {
+    return 'Product{id: $id, name: $name, description: $description, img: $img, price: $price}';
+  }
 }

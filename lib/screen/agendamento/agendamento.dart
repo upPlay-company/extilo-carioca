@@ -1,3 +1,4 @@
+import 'package:extilo_carioca/screen/agendamento/components/agendamento_prof_tile.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
   double whiteMargin = 2.5;
   double imageMargin = 4.0;
   double schedulingPadding = 20;
+  int barber;
 
   @override
   Widget build(BuildContext context) {
@@ -75,12 +77,9 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
                                   ),
                                 ),
                                 scheduling("Serviço", Icons.cut,
+                                    showModal: _showModalServico),
+                                scheduling('Barbeiro', Icons.account_circle,
                                     showModal: _showModalProfissional),
-                                scheduling(
-                                  "Barbeiro",
-                                  Icons.account_circle,
-                                  showModal: _showModalBarber,
-                                ),
                                 scheduling(
                                   "Data e Hora",
                                   Icons.date_range,
@@ -138,7 +137,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
     );
   }
 
-  void _showModalBarber() {
+  void _showModalServico() {
     showModalBottomSheet<void>(
       backgroundColor: Colors.black,
       isScrollControlled: true,
@@ -149,13 +148,16 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
     );
   }
 
-  void _showModalProfissional() {
+  Future<void> _showModalProfissional() {
     showModalBottomSheet<void>(
       backgroundColor: Colors.black,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return modelContainer();
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.6,
+          child: AgendamentoProfTile()
+          );
       },
     );
   }
@@ -163,7 +165,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
   Container modelContainer({Widget child}){
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-      color: Colors.black54,
+
     );
   }
 

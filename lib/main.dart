@@ -7,16 +7,26 @@ import 'package:extilo_carioca/screen/base/base_screen.dart';
 import 'package:extilo_carioca/screen/inicial/inicial_screen.dart';
 import 'package:extilo_carioca/screen/login/login_screen.dart';
 import 'package:extilo_carioca/screen/profissionais/profissionais_screen.dart';
+import 'package:extilo_carioca/screen/servicos/servico_screen.dart';
+import 'package:extilo_carioca/store/agendamento_store.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+
 import 'model/unidades/unidades_manager.dart';
 import 'screen/agendamento/agendamento.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  setupLocation();
   runApp(MyApp());
+}
+
+void setupLocation() {
+  GetIt.I.registerSingleton(AgendamentoStore());
+  GetIt.I.registerSingleton(UserManager());
 }
 
 class MyApp extends StatelessWidget {
@@ -57,29 +67,21 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: 'inicial',
-        onGenerateRoute: (settings){
-          switch(settings.name){
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
             case '/profissionais':
-              return MaterialPageRoute(
-                  builder: (_) => ProfissionaisScreen()
-              );
+              return MaterialPageRoute(builder: (_) => ProfissionaisScreen());
             case '/servicos':
-              return MaterialPageRoute(
-                  builder: (_) => SchedulingScreen()
-              );
+              return MaterialPageRoute(builder: (_) => ServicoScreen());
+            case '/agendamento':
+              return MaterialPageRoute(builder: (_) => SchedulingScreen());
             case '/login':
-              return MaterialPageRoute(
-                builder: (_) => LoginScreen()
-              );
+              return MaterialPageRoute(builder: (_) => LoginScreen());
             case '/base':
-              return MaterialPageRoute(
-                builder: (_) => BaseScreen()
-              );
+              return MaterialPageRoute(builder: (_) => BaseScreen());
             case '/inicial':
-              default:
-                return MaterialPageRoute(
-                  builder: (_) => InicialScreen()
-                );
+            default:
+              return MaterialPageRoute(builder: (_) => InicialScreen());
           }
         },
       ),

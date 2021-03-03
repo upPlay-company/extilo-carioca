@@ -3,12 +3,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 class Servicos extends ChangeNotifier {
-
-  Servicos({this.img}){
+  Servicos({this.img}) {
     img = img ?? [];
   }
 
-  Servicos.fromDocument(DocumentSnapshot document){
+  Servicos.fromDocument(DocumentSnapshot document) {
     id = document.id;
     name = document.data()['name'] as String;
     price = document.data()['price'] as int;
@@ -28,4 +27,8 @@ class Servicos extends ChangeNotifier {
   String duracao;
   List<String> img;
 
+  @override
+  String toString() {
+    return 'Servicos{storage: $storage, id: $id, name: $name, price: $price, duracao: $duracao, img: $img}';
+  }
 }

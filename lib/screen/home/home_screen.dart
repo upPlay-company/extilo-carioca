@@ -60,7 +60,9 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             GestureDetector(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.of(context).pushNamed('/agendamento');
+                              },
                               child: Container(
                                 height: 80,
                                 width: 80,

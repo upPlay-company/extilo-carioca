@@ -3,9 +3,8 @@ import 'package:extilo_carioca/model/profissionais/profissionais.dart';
 import 'package:flutter/cupertino.dart';
 
 class ProfissionaisManager extends ChangeNotifier {
-
-  ProfissionaisManager(){
-    _loadProfissionais();
+  ProfissionaisManager() {
+    loadProfissionais();
   }
 
   List<Profissionais> _profissionais = [];
@@ -15,17 +14,16 @@ class ProfissionaisManager extends ChangeNotifier {
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> _loadProfissionais() async {
+  Future<void> loadProfissionais() async {
     final QuerySnapshot snapPro =
-    await firestore.collection('profissionais').get();
+        await firestore.collection('profissionais').get();
 
-    _profissionais = snapPro.docs.map(
-            (p) => Profissionais.fromDocument(p)).toList();
+    _profissionais =
+        snapPro.docs.map((p) => Profissionais.fromDocument(p)).toList();
     notifyListeners();
   }
 
   List<Profissionais> get profissionais {
     return _profissionais;
   }
-
 }
