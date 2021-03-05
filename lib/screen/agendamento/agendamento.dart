@@ -1,4 +1,5 @@
-import 'package:extilo_carioca/screen/agendamento/components/agendamento_prof_tile.dart';
+import 'package:extilo_carioca/screen/agendamento/scheduling_modal.dart';
+import 'package:extilo_carioca/screen/agendamento/servico_modal.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,9 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
   double imageMargin = 4.0;
   double schedulingPadding = 20;
   int barber;
+  RoundedRectangleBorder styleShape = new RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(30),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -105,22 +109,25 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
   Widget styleButton() {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
-      child: SizedBox(
-        width: 120,
-        height: 50,
-        child: Container(
-          child: Center(
-            child: Text(
-              "AGENDAR",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+      child: InkWell(
+        onTap: () {},
+        child: SizedBox(
+          width: 150,
+          height: 50,
+          child: Container(
+            child: Center(
+              child: Text(
+                "AGENDAR",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
+            decoration: BoxDecoration(
+                color: Color(0xff3c5a99),
+                borderRadius: BorderRadius.circular(20)),
           ),
-          decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20)),
         ),
       ),
     );
@@ -128,6 +135,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
 
   void _showModalDate() {
     showModalBottomSheet<void>(
+      shape: styleShape,
       backgroundColor: Colors.black,
       isScrollControlled: true,
       context: context,
@@ -139,33 +147,34 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
 
   void _showModalServico() {
     showModalBottomSheet<void>(
-      backgroundColor: Colors.black,
+      shape: styleShape,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return modelContainer();
+        return modelContainer(
+          child: ServiceModal(),
+        );
       },
     );
   }
 
-  Future<void> _showModalProfissional() {
+  void _showModalProfissional() {
     showModalBottomSheet<void>(
-      backgroundColor: Colors.black,
+      shape: styleShape,
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.6,
-          child: AgendamentoProfTile()
-          );
+        return modelContainer(
+          child: SchedulingModal(),
+        );
       },
     );
   }
 
-  Container modelContainer({Widget child}){
+  Container modelContainer({Widget child}) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
-
+      child: child,
     );
   }
 
@@ -180,11 +189,10 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
             );
           },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(60),
-            color: Colors.white,
-          ),
           height: 60,
           child: Row(
             children: [

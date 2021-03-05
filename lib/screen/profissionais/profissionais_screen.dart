@@ -1,4 +1,5 @@
 import 'package:extilo_carioca/model/profissionais/profissionais_manager.dart';
+import 'package:extilo_carioca/screen/profissionais/components/profissionais_list_tile.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,8 @@ class ProfissionaisScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: profissinaisManager.profissionais.length,
                 itemBuilder: (_, index) {
-                  return Container();
+                  return ProfissionaisListTile(
+                      profissinaisManager.profissionais[index]);
                 },
               );
             },

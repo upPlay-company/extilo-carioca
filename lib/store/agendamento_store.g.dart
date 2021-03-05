@@ -13,15 +13,33 @@ mixin _$AgendamentoStore on _AgendamentoStore, Store {
       ActionController(name: '_AgendamentoStore');
 
   @override
-  void setAll(
-      {List<Servicos> servico,
-      List<Product> product,
-      List<Profissionais> profissionais}) {
+  void setProfissional(List<Profissionais> profissional) {
     final _$actionInfo = _$_AgendamentoStoreActionController.startAction(
-        name: '_AgendamentoStore.setAll');
+        name: '_AgendamentoStore.setProfissional');
     try {
-      return super.setAll(
-          servico: servico, product: product, profissionais: profissionais);
+      return super.setProfissional(profissional);
+    } finally {
+      _$_AgendamentoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setProduct(List<Product> product) {
+    final _$actionInfo = _$_AgendamentoStoreActionController.startAction(
+        name: '_AgendamentoStore.setProduct');
+    try {
+      return super.setProduct(product);
+    } finally {
+      _$_AgendamentoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setService(List<Servicos> servico) {
+    final _$actionInfo = _$_AgendamentoStoreActionController.startAction(
+        name: '_AgendamentoStore.setService');
+    try {
+      return super.setService(servico);
     } finally {
       _$_AgendamentoStoreActionController.endAction(_$actionInfo);
     }

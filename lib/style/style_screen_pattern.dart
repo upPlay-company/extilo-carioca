@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class styleScreenPattern extends StatelessWidget {
-
   styleScreenPattern({this.child});
 
   final child;
@@ -23,4 +22,3 @@ class styleScreenPattern extends StatelessWidget {
     );
   }
 }
-

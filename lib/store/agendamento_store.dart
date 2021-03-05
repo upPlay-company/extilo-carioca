@@ -15,19 +15,21 @@ abstract class _AgendamentoStore with Store {
     _loadAll();
   }
 
-  //Listas Observable
-  ObservableList<Profissionais> professionalList =
+  //Listas Observable profissional
+  ObservableList<Profissionais> profissionalList =
       ObservableList<Profissionais>();
 
+  //Listas Observable produto
   ObservableList<Product> productList = ObservableList<Product>();
 
+  //Listas Observable servico
   ObservableList<Servicos> servicosList = ObservableList<Servicos>();
 
   //Actions
-/*  @action
+  @action
   void setProfissional(List<Profissionais> profissional) {
-    professionalList.clear();
-    professionalList.addAll(profissional);
+    profissionalList.clear();
+    profissionalList.addAll(profissional);
   }
 
   @action
@@ -40,19 +42,6 @@ abstract class _AgendamentoStore with Store {
   void setService(List<Servicos> servico) {
     servicosList.clear();
     servicosList.addAll(servico);
-  }*/
-
-  @action
-  void setAll(
-      {List<Servicos> servico,
-      List<Product> product,
-      List<Profissionais> profissionais}) {
-    servicosList.clear();
-    productList.clear();
-    professionalList.clear();
-    servicosList.addAll(servico);
-    productList.addAll(product);
-    professionalList.addAll(profissionais);
   }
 
   //Loads de funções do app
@@ -65,25 +54,18 @@ abstract class _AgendamentoStore with Store {
     //Listas de Profissionais
     final profissionais =
         queryBuild.docs.map((p) => Profissionais.fromDocument(p)).toList();
-    print(profissionais);
 
+    print(profissionais);
     //Listas de Produtos
     final product =
         queryBuildProduct.docs.map((r) => Product.fromDocument(r)).toList();
-    print(product);
 
     //Listas de Serviços
     final servico =
         queryBuildServico.docs.map((s) => Servicos.fromDocument(s)).toList();
-    print(servico);
 
-    //Função para adicionar a lista produtos
-    setAll(product: product);
-
-    //Função para adicionar a lista profissionais
-    setAll(profissionais: profissionais);
-
-    //Função para adicionar a lista servicos
-    setAll(servico: servico);
+    setProfissional(profissionais);
+    setService(servico);
+    setProduct(product);
   }
 }
