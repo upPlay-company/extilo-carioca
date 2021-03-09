@@ -8,7 +8,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 //Variaveis Globais
 final Color primaryColor = Color(0xff078c9f);
-String title;
 
 class SchedulingScreen extends StatefulWidget {
   @override
