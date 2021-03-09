@@ -1,10 +1,14 @@
+import 'package:extilo_carioca/screen/agendamento/components/servicosfield.dart';
 import 'package:extilo_carioca/screen/agendamento/scheduling_modal.dart';
 import 'package:extilo_carioca/screen/agendamento/servico_modal.dart';
+import 'package:extilo_carioca/store/createstore.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 //Variaveis Globais
 final Color primaryColor = Color(0xff078c9f);
+String title;
 
 class SchedulingScreen extends StatefulWidget {
   @override
@@ -16,91 +20,97 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
   double imageMargin = 4.0;
   double schedulingPadding = 20;
   int barber;
+  CreateStore createStore;
   RoundedRectangleBorder styleShape = new RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30),
   );
 
   @override
   Widget build(BuildContext context) {
-    return styleScreenPattern(
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            centerTitle: true,
-            iconTheme: new IconThemeData(color: Colors.black),
-            title: Text(
-              'EXTILO CARIOCA',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Principal'),
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
-          body: Stack(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.5,
-                  left: 12,
-                  right: 12,
+    return Observer(
+      builder: (_) {
+        return styleScreenPattern(
+          child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                centerTitle: true,
+                iconTheme: new IconThemeData(color: Colors.black),
+                title: Text(
+                  'EXTILO CARIOCA',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Principal'),
                 ),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              body: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.4,
+                      left: 12,
+                      right: 12,
+                    ),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: schedulingPadding,
+                              left: schedulingPadding,
+                              right: schedulingPadding,
+                            ),
+                            child: Center(
+                              child: Expanded(
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 35,
+                                      child: Text(
+                                        "Agende seu horario",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    ServicosField(createStore),
+                                    scheduling("Serviço", Icons.cut,
+                                        showModal: _showModalServico),
+                                    scheduling('Barbeiro', Icons.account_circle,
+                                        showModal: _showModalProfissional),
+                                    scheduling(
+                                      "Data e Hora",
+                                      Icons.date_range,
+                                      showModal: _showModalDate,
+                                    ),
+                                    styleButton(),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ), //Padding do agendamento
+                        ],
+                      ),
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: schedulingPadding,
-                          left: schedulingPadding,
-                          right: schedulingPadding,
-                        ),
-                        child: Center(
-                          child: Expanded(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 35,
-                                  child: Text(
-                                    "Agende seu horario",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                scheduling("Serviço", Icons.cut,
-                                    showModal: _showModalServico),
-                                scheduling('Barbeiro', Icons.account_circle,
-                                    showModal: _showModalProfissional),
-                                scheduling(
-                                  "Data e Hora",
-                                  Icons.date_range,
-                                  showModal: _showModalDate,
-                                ),
-                                styleButton(),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ), //Padding do agendamento
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          )),
+                ],
+              )),
+        );
+      },
     );
   }
 
@@ -180,7 +190,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
 
   //Função Scheduling recebe parametros opcional, você passa uma rota ou passa uma função
   Widget scheduling(String title, IconData icon,
-      {Widget rota, Function showModal}) {
+      {Widget rota, Function showModal, createstore}) {
     return GestureDetector(
       onTap: showModal ??
           () {

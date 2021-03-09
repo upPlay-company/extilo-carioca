@@ -3,7 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 class Servicos extends ChangeNotifier {
-  Servicos({this.img}) {
+  Servicos({this.img, this.id}) {
     img = img ?? [];
   }
 

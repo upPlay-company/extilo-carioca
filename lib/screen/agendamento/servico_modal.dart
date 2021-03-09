@@ -4,6 +4,8 @@ import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+String teste;
+
 class ServiceModal extends StatelessWidget {
   ServiceModal({this.selected});
 
@@ -35,9 +37,17 @@ class ServiceModal extends StatelessWidget {
             child: ListView.separated(
                 itemBuilder: (_, index) {
                   final servList = agendamentoStore.servicosList[index];
+                  final fontStyle = TextStyle(
+                      fontSize: 17,
+                      fontWeight: servList.id == selected?.id
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      fontFamily: 'Principal');
                   return InkWell(
                     splashColor: Colors.blueGrey[200],
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pop(servList);
+                    },
                     child: Card(
                       color: Colors.white70,
                       elevation: 15.0,
@@ -46,7 +56,11 @@ class ServiceModal extends StatelessWidget {
                       ),
                       child: Container(
                         height: 70,
-                        color: servList.id == selected?.id ? Colors.blue : null,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color:
+                              servList.id == selected?.id ? Colors.blue : null,
+                        ),
                         child: Column(
                           children: [
                             Row(
@@ -59,28 +73,16 @@ class ServiceModal extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        servList.name,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Principal'),
-                                      ),
+                                      Text(servList.name, style: fontStyle),
                                       Row(
                                         children: [
                                           Text(
                                             'Tempo: ',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                                fontFamily: 'Principal'),
+                                            style: fontStyle,
                                           ),
                                           Text(
                                             servList.duracao,
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                                fontFamily: 'Principal'),
+                                            style: fontStyle,
                                           ),
                                         ],
                                       )
@@ -96,17 +98,11 @@ class ServiceModal extends StatelessWidget {
                                     children: [
                                       Text(
                                         'A parti de:',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Principal'),
+                                        style: fontStyle,
                                       ),
                                       Text(
                                         'R\$${servList.price.toStringAsFixed(2)}',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'Principal'),
+                                        style: fontStyle,
                                       )
                                     ],
                                   ),
