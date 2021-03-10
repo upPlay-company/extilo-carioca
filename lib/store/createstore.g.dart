@@ -24,7 +24,33 @@ mixin _$CreateStore on _CreateStore, Store {
     });
   }
 
+  final _$profissionaisAtom = Atom(name: '_CreateStore.profissionais');
+
+  @override
+  Profissionais get profissionais {
+    _$profissionaisAtom.reportRead();
+    return super.profissionais;
+  }
+
+  @override
+  set profissionais(Profissionais value) {
+    _$profissionaisAtom.reportWrite(value, super.profissionais, () {
+      super.profissionais = value;
+    });
+  }
+
   final _$_CreateStoreActionController = ActionController(name: '_CreateStore');
+
+  @override
+  void setProfissional(Profissionais value) {
+    final _$actionInfo = _$_CreateStoreActionController.startAction(
+        name: '_CreateStore.setProfissional');
+    try {
+      return super.setProfissional(value);
+    } finally {
+      _$_CreateStoreActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setServicos(Servicos value) {
@@ -40,7 +66,8 @@ mixin _$CreateStore on _CreateStore, Store {
   @override
   String toString() {
     return '''
-servicos: ${servicos}
+servicos: ${servicos},
+profissionais: ${profissionais}
     ''';
   }
 }

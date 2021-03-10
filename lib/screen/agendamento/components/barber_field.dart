@@ -1,10 +1,10 @@
-import 'package:extilo_carioca/screen/agendamento/servico_modal.dart';
+import 'package:extilo_carioca/screen/agendamento/scheduling_modal.dart';
 import 'package:extilo_carioca/store/createstore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class ServicosField extends StatelessWidget {
-  ServicosField(this.createStore);
+class BarberField extends StatelessWidget {
+  BarberField(this.createStore);
 
   final CreateStore createStore;
 
@@ -13,14 +13,14 @@ class ServicosField extends StatelessWidget {
     return Observer(builder: (_) {
       return GestureDetector(
         onTap: () async {
-          final servicos = await showDialog(
+          final profissional = await showDialog(
             context: context,
-            builder: (_) => ServiceModal(
-              selected: createStore.servicos,
+            builder: (_) => SchedulingModal(
+              selected: createStore.profissionais,
             ),
           );
-          if (servicos != null) {
-            createStore.setServicos(servicos);
+          if (profissional != null) {
+            createStore.setProfissional(profissional);
           }
         },
         child: Card(
@@ -39,9 +39,9 @@ class ServicosField extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
-                        createStore.servicos == null
-                            ? 'Serviços'
-                            : 'Serviço: ${createStore?.servicos?.name}',
+                        createStore.profissionais == null
+                            ? 'Barbeiro'
+                            : 'Barbeiro: ${createStore?.profissionais?.name}',
                         style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'Principal',

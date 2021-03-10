@@ -1,5 +1,6 @@
 import 'package:extilo_carioca/model/servicos/servicos.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
+import 'package:extilo_carioca/store/createstore.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -7,9 +8,10 @@ import 'package:get_it/get_it.dart';
 String teste;
 
 class ServiceModal extends StatelessWidget {
-  ServiceModal({this.selected});
+  ServiceModal({this.selected, this.createStore});
 
   final AgendamentoStore agendamentoStore = GetIt.I<AgendamentoStore>();
+  final CreateStore createStore;
 
   final Servicos selected;
 

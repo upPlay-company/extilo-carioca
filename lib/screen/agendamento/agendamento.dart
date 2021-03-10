@@ -1,3 +1,4 @@
+import 'package:extilo_carioca/screen/agendamento/components/barber_field.dart';
 import 'package:extilo_carioca/screen/agendamento/components/servicosfield.dart';
 import 'package:extilo_carioca/screen/agendamento/scheduling_modal.dart';
 import 'package:extilo_carioca/screen/agendamento/servico_modal.dart';
@@ -19,10 +20,11 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
   double imageMargin = 4.0;
   double schedulingPadding = 20;
   int barber;
-  CreateStore createStore;
   RoundedRectangleBorder styleShape = new RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(30),
   );
+
+  final CreateStore createStore = CreateStore();
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +89,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
                                       ),
                                     ),
                                     ServicosField(createStore),
-                                    scheduling("Serviço", Icons.cut,
-                                        showModal: _showModalServico),
-                                    scheduling('Barbeiro', Icons.account_circle,
-                                        showModal: _showModalProfissional),
+                                    BarberField(createStore),
                                     scheduling(
                                       "Data e Hora",
                                       Icons.date_range,
@@ -189,7 +188,7 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
 
   //Função Scheduling recebe parametros opcional, você passa uma rota ou passa uma função
   Widget scheduling(String title, IconData icon,
-      {Widget rota, Function showModal, createstore}) {
+      {Widget rota, Function showModal}) {
     return GestureDetector(
       onTap: showModal ??
           () {
