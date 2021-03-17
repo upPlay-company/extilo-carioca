@@ -33,7 +33,7 @@ class BarberField extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
-                  child: Icon(Icons.cut),
+                  child: Icon(Icons.account_circle_rounded),
                 ),
                 Expanded(
                   child: Padding(

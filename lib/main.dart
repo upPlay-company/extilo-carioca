@@ -6,8 +6,8 @@ import 'package:extilo_carioca/model/user/user_manager.dart';
 import 'package:extilo_carioca/screen/base/base_screen.dart';
 import 'package:extilo_carioca/screen/inicial/inicial_screen.dart';
 import 'package:extilo_carioca/screen/login/login_screen.dart';
+import 'package:extilo_carioca/screen/loyaltycard/loyalty_card.dart';
 import 'package:extilo_carioca/screen/profissionais/profissionais_screen.dart';
-import 'package:extilo_carioca/screen/servicos/servico_screen.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -71,8 +71,8 @@ class MyApp extends StatelessWidget {
           switch (settings.name) {
             case '/profissionais':
               return MaterialPageRoute(builder: (_) => ProfissionaisScreen());
-            case '/servicos':
-              return MaterialPageRoute(builder: (_) => ServicoScreen());
+            case '/credito':
+              return MaterialPageRoute(builder: (_) => LoyaltyCard());
             case '/agendamento':
               return MaterialPageRoute(builder: (_) => SchedulingScreen());
             case '/login':

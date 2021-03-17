@@ -1,7 +1,5 @@
 import 'package:extilo_carioca/screen/agendamento/components/barber_field.dart';
 import 'package:extilo_carioca/screen/agendamento/components/servicosfield.dart';
-import 'package:extilo_carioca/screen/agendamento/scheduling_modal.dart';
-import 'package:extilo_carioca/screen/agendamento/servico_modal.dart';
 import 'package:extilo_carioca/store/createstore.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
@@ -88,8 +86,9 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
                                         ),
                                       ),
                                     ),
-                                    ServicosField(createStore),
                                     BarberField(createStore),
+                                    ServicosField(createStore),
+                                    ServicosField(createStore),
                                     scheduling(
                                       "Data e Hora",
                                       Icons.date_range,
@@ -149,32 +148,6 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
       context: context,
       builder: (BuildContext context) {
         return modelContainer();
-      },
-    );
-  }
-
-  void _showModalServico() {
-    showModalBottomSheet<void>(
-      shape: styleShape,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return modelContainer(
-          child: ServiceModal(),
-        );
-      },
-    );
-  }
-
-  void _showModalProfissional() {
-    showModalBottomSheet<void>(
-      shape: styleShape,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return modelContainer(
-          child: SchedulingModal(),
-        );
       },
     );
   }

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,13 +16,13 @@ class HomeScreen extends StatelessWidget {
           centerTitle: true,
           automaticallyImplyLeading: false,
           iconTheme: new IconThemeData(color: Colors.black),
-          title: Text('EXTILO CARIOCA',
+          title: Text(
+            'EXTILO CARIOCA',
             style: TextStyle(
-              color: Colors.black,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Principal'
-            ),
+                color: Colors.black,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Principal'),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -32,7 +31,7 @@ class HomeScreen extends StatelessWidget {
           slivers: [
             Consumer<BannersManager>(
               builder: (_, bannersManager, __) {
-                if(bannersManager.loading) {
+                if (bannersManager.loading) {
                   return SliverToBoxAdapter(
                     child: LinearProgressIndicator(
                       valueColor: AlwaysStoppedAnimation(Colors.black),
@@ -41,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 }
                 final List<Widget> children =
-                bannersManager.banners.map<Widget>((banners) {
+                    bannersManager.banners.map<Widget>((banners) {
                   return BannersTile(banners);
                 }).toList();
                 return SliverList(
@@ -60,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Navigator.of(context).pushNamed('/agendamento');
                               },
                               child: Container(
@@ -69,19 +68,19 @@ class HomeScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
-                                      image: AssetImage('images/Agendar 3.png')
-                                    )
-                                ),
+                                        image: AssetImage(
+                                            'images/Agendar 3.png'))),
                               ),
                             ),
-                            SizedBox(height: 5,),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Text(
                               'AGENDAR',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17
-                              ),
+                                  fontSize: 17),
                             ),
                           ],
                         ),
@@ -93,28 +92,29 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             GestureDetector(
-                              onTap: (){
-                                Navigator.of(context).pushNamed('/profissionais');
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed('/profissionais');
                               },
                               child: Container(
                                 height: 80,
                                 width: 80,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                    image: AssetImage('images/Profissionais.png')
-                                  )
-                                ),
-                                ),
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'images/Profissionais.png'))),
                               ),
-                            SizedBox(height: 5,),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
                             Text(
                               'PROSSIONAIS',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17
-                              ),
+                                  fontSize: 17),
                             ),
                           ],
                         ),
@@ -127,128 +127,121 @@ class HomeScreen extends StatelessWidget {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: (){},
-                              child: Container(
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      image: AssetImage('images/Pacotes.png')
-                                    )
-                                ),
-                              ),
+                child: Row(children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      image: AssetImage('images/Pacotes.png'))),
                             ),
-                            SizedBox(height: 5,),
-                            Text(
-                              'PACOTES',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'PACOTES',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ],
                       ),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.of(context).pushNamed('/servicos');
-                              },
-                              child: Container(
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      image: AssetImage('images/Creditos.png')
-                                    )
-                                ),
-                              ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/credito');
+                            },
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage('images/Creditos.png'))),
                             ),
-                            SizedBox(height: 5,),
-                            Text(
-                              'SERVIÇOS',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'CRÉDITOS',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                        ],
                       ),
                     ),
-                  ]
-                ),
+                  ),
+                ]),
               ),
             ),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: (){
-                                launch('https://www.facebook.com/ExtiloCarioca/');
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        image: AssetImage('images/Icone face.png')
-                                    )
-                                ),
-                              ),
-                            ),
-                          ],
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            launch('https://www.facebook.com/ExtiloCarioca/');
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('images/Icone face.png'))),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              onTap: (){
-                                launch('https://www.instagram.com/extilocarioca/');
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      image: AssetImage('images/icone insta.png')
-                                    )
-                                ),
-                              ),
-                            ),
-                          ],
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            launch('https://www.instagram.com/extilocarioca/');
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('images/icone insta.png'))),
+                          ),
                         ),
-                      ),
-                    ]
-                ),
+                      ],
+                    ),
+                  ),
+                ]),
               ),
             ),
           ],

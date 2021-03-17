@@ -97,5 +97,4 @@ class UserManager extends ChangeNotifier {
   void newPass(String newPassword) {
     auth.currentUser.updatePassword(newPassword);
   }
-
 }
