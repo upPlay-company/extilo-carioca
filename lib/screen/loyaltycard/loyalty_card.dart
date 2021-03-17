@@ -1,5 +1,6 @@
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoyaltyCard extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class LoyaltyCard extends StatefulWidget {
 }
 
 class _LoyaltyCardState extends State<LoyaltyCard> {
+  double sizeIconSocial = 50;
   @override
   Widget build(BuildContext context) {
     return styleScreenPattern(
@@ -76,6 +78,7 @@ class _LoyaltyCardState extends State<LoyaltyCard> {
                 top: MediaQuery.of(context).size.width * 0.8,
                 left: MediaQuery.of(context).size.width * 0.1,
                 child: Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
                       "Faltam",
@@ -105,15 +108,65 @@ class _LoyaltyCardState extends State<LoyaltyCard> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 60.0),
+                      padding: const EdgeInsets.only(
+                        top: 80.0,
+                        bottom: 50,
+                      ),
                       child: Text(
                         "Troque seus créditos, vale 1 corte ou barba",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.grey[700],
                           fontSize: 15,
                         ),
                       ),
                     ),
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                launch(
+                                    'https://www.facebook.com/ExtiloCarioca/');
+                              },
+                              child: Container(
+                                height: sizeIconSocial,
+                                width: sizeIconSocial,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'images/Icone face.png'))),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 50,
+                          ),
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  launch(
+                                      'https://www.instagram.com/extilocarioca/');
+                                },
+                                child: Container(
+                                  height: sizeIconSocial,
+                                  width: sizeIconSocial,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'images/icone insta.png'))),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -122,6 +175,7 @@ class _LoyaltyCardState extends State<LoyaltyCard> {
     );
   }
 
+  //Declaração de funções
   Widget faithfulness(bool disabled) {
     return Center(
       child: Padding(
