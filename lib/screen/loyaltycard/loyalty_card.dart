@@ -9,6 +9,7 @@ class LoyaltyCard extends StatefulWidget {
 
 class _LoyaltyCardState extends State<LoyaltyCard> {
   double sizeIconSocial = 50;
+
   @override
   Widget build(BuildContext context) {
     return styleScreenPattern(
