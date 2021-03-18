@@ -58,21 +58,22 @@ class SchedulingModal extends StatelessWidget {
                           color:
                               profList.id == selected?.id ? Colors.blue : null,
                         ),
-                        height: 70,
-                        child: Column(
+                        height: 60,
+                        child: Row(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(profList.img.first),
-                                ),
-                                Text(
-                                  profList.name,
-                                  style: fontStyle,
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 15,
+                                right: 30,
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(profList.img.first),
+                              ),
+                            ),
+                            Text(
+                              profList.name,
+                              style: fontStyle,
                             ),
                           ],
                         ),
