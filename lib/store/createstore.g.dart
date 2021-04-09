@@ -39,7 +39,33 @@ mixin _$CreateStore on _CreateStore, Store {
     });
   }
 
+  final _$productAtom = Atom(name: '_CreateStore.product');
+
+  @override
+  Product get product {
+    _$productAtom.reportRead();
+    return super.product;
+  }
+
+  @override
+  set product(Product value) {
+    _$productAtom.reportWrite(value, super.product, () {
+      super.product = value;
+    });
+  }
+
   final _$_CreateStoreActionController = ActionController(name: '_CreateStore');
+
+  @override
+  void setProduct(Product value) {
+    final _$actionInfo = _$_CreateStoreActionController.startAction(
+        name: '_CreateStore.setProduct');
+    try {
+      return super.setProduct(value);
+    } finally {
+      _$_CreateStoreActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setProfissional(Profissionais value) {
@@ -67,7 +93,8 @@ mixin _$CreateStore on _CreateStore, Store {
   String toString() {
     return '''
 servicos: ${servicos},
-profissionais: ${profissionais}
+profissionais: ${profissionais},
+product: ${product}
     ''';
   }
 }

@@ -1,4 +1,4 @@
-import 'package:extilo_carioca/screen/agendamento/servico_modal.dart';
+import 'package:extilo_carioca/screen/agendamento/modais/servico_modal.dart';
 import 'package:extilo_carioca/store/createstore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -32,22 +32,18 @@ class ServicosField extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Icon(Icons.cut),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                        createStore.servicos == null
-                            ? 'Serviços'
-                            : 'Serviço: ${createStore?.servicos?.name}',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Principal',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800)),
-                  ),
+                Text(
+                  createStore.servicos == null
+                      ? 'Serviços'
+                      : 'Serviço: ${createStore?.servicos?.name}',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Principal',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800),
                 ),
               ],
             ),

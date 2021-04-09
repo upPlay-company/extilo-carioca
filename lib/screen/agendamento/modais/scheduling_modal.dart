@@ -1,4 +1,5 @@
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
+import 'package:extilo_carioca/screen/calendar_barber/calendar_barber.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,6 @@ class SchedulingModal extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             centerTitle: true,
-            iconTheme: new IconThemeData(color: Colors.black),
             title: Text(
               'BARBEIROS',
               style: TextStyle(
@@ -44,7 +44,13 @@ class SchedulingModal extends StatelessWidget {
                   return InkWell(
                     splashColor: Colors.blueGrey[200],
                     onTap: () {
-                      Navigator.of(context).pop(profList);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CalendarBarber(
+                                  barber: profList,
+                                )),
+                      );
                     },
                     child: Card(
                       color: Colors.white70,

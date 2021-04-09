@@ -11,10 +11,8 @@ class Servicos {
     img = List<String>.from(document.data()['img'] as List<dynamic>);
   }
 
-  String id;
-  String name;
+  String id, duracao, name;
   int price;
-  String duracao;
   List<String> img;
 
   @override

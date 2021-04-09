@@ -1,4 +1,4 @@
-import 'package:extilo_carioca/screen/agendamento/scheduling_modal.dart';
+import 'package:extilo_carioca/screen/agendamento/modais/scheduling_modal.dart';
 import 'package:extilo_carioca/store/createstore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

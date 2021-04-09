@@ -74,8 +74,7 @@ class UserManager extends ChangeNotifier {
   }
 
   Future<void> _loadCurrentUser({User firebaseUser}) async {
-    final User currentUser = firebaseUser ??
-        auth.currentUser; //tirei await se de merda é so coloca de novo para paulo
+    final User currentUser = firebaseUser ?? auth.currentUser;
     if (currentUser != null) {
       final DocumentSnapshot docUser =
           await firestore.collection('users').doc(currentUser.uid).get();

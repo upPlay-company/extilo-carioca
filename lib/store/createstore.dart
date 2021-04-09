@@ -1,3 +1,4 @@
+import 'package:extilo_carioca/model/produtos/product.dart';
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
 import 'package:extilo_carioca/model/servicos/servicos.dart';
 import 'package:mobx/mobx.dart';
@@ -12,6 +13,12 @@ abstract class _CreateStore with Store {
 
   @observable
   Profissionais profissionais;
+
+  @observable
+  Product product;
+
+  @action
+  void setProduct(Product value) => product = value;
 
   @action
   void setProfissional(Profissionais value) => profissionais = value;

@@ -21,9 +21,7 @@ class Product extends ChangeNotifier {
   DocumentReference get firestoreRef => firestore.doc('produtos/$id');
   get storageRef => storage.ref().child('produtos/$id');
 
-  String id;
-  String name;
-  String description;
+  String id, name, description;
   List<String> img;
   int price;
 
