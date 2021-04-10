@@ -1,4 +1,5 @@
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
+import 'package:extilo_carioca/model/servicos/servicos.dart';
 import 'package:extilo_carioca/screen/calendar_barber/calendar_barber.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
@@ -6,11 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class SchedulingModal extends StatelessWidget {
-  SchedulingModal({this.selected});
+  SchedulingModal({this.selected, this.servicos});
 
   final AgendamentoStore agendamentoStore = GetIt.I<AgendamentoStore>();
 
   final Profissionais selected;
+
+  final Servicos servicos;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +23,14 @@ class SchedulingModal extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              'BARBEIROS',
+              'ESCOLHA UM BARBEIRO',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Principal'),
             ),
+            iconTheme: IconThemeData(color: Colors.black),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
@@ -35,6 +39,8 @@ class SchedulingModal extends StatelessWidget {
             child: ListView.separated(
                 itemBuilder: (_, index) {
                   final profList = agendamentoStore.profissionalList[index];
+                  final servList = servicos;
+                  print(servList);
                   final fontStyle = TextStyle(
                       fontSize: profList.id == selected?.id ? 20 : 18,
                       fontWeight: profList.id == selected?.id
@@ -49,6 +55,7 @@ class SchedulingModal extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => CalendarBarber(
                                   barber: profList,
+                                  servico: servList,
                                 )),
                       );
                     },

@@ -1,4 +1,5 @@
 import 'package:extilo_carioca/model/servicos/servicos.dart';
+import 'package:extilo_carioca/screen/agendamento/modais/scheduling_modal.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
 import 'package:extilo_carioca/store/createstore.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
@@ -22,10 +23,10 @@ class ServiceModal extends StatelessWidget {
           centerTitle: true,
           iconTheme: new IconThemeData(color: Colors.black),
           title: Text(
-            'SERVIÇOS',
+            'ESCOLHA UM SERVIÇO',
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 22,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Principal'),
           ),
@@ -46,7 +47,13 @@ class ServiceModal extends StatelessWidget {
               return InkWell(
                 splashColor: Colors.blueGrey[200],
                 onTap: () {
-                  Navigator.of(context).pop(servList);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SchedulingModal(
+                          servicos: servList,
+                        )),
+                  );
                 },
                 child: Card(
                   color: Colors.white70,

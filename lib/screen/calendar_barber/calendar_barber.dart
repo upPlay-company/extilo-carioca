@@ -3,9 +3,11 @@ import 'package:extilo_carioca/helpers/convert_date.dart';
 import 'package:extilo_carioca/model/agendamento/Notify.dart';
 import 'package:extilo_carioca/model/agendamento/criar_agendamento.dart';
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
+import 'package:extilo_carioca/model/servicos/servicos.dart';
 import 'package:extilo_carioca/screen/agendamento/components/EasyLoading.dart';
 import 'package:extilo_carioca/style/ButtonStyles.dart';
 import 'package:extilo_carioca/style/Colors.dart';
+import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -14,25 +16,29 @@ import 'package:table_calendar/table_calendar.dart';
 
 class CalendarBarber extends StatefulWidget {
   @override
-  _CalendarBarberState createState() => _CalendarBarberState();
+  _CalendarBarberState createState() => _CalendarBarberState(servico);
   String userName;
   Profissionais barber;
+  Servicos servico;
 
-  CalendarBarber({Profissionais barber}) {
+  CalendarBarber({Profissionais barber, Servicos servico}) {
     this.barber = barber;
+    this.servico = servico;
   }
 }
 
 class _CalendarBarberState extends State<CalendarBarber> {
   CalendarController _calendarController = CalendarController();
 
+  _CalendarBarberState(this.servico);
+
   String username;
   String thumbnailUser;
   Profissionais barber;
+  Servicos servico;
   FirebaseFirestore db = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
   Color todayColor = accentColor;
-  //info to save
   int indexColor;
   int weekDay;
   DateTime daySelected;
@@ -94,26 +100,23 @@ class _CalendarBarberState extends State<CalendarBarber> {
               hour: hourSelected,
               employeeId: barber.id,
               nameCustomer: username,
-              thumbnailCustomer: thumbnailUser,
+              thumbnailCustomer: auth.currentUser.email,
               concluded: false,
               customerId: auth.currentUser.uid,
-              nameEmployee: barber.name);
+              nameEmployee: barber.name,
+              serviceName: servico.name,
+              serviceDuration: servico.duracao,
+              servicePrice: servico.price);
           Notify notification = Notify(
               customerName: username,
               date: daySelected,
               type: 'Agendamento',
               hour: hourSelected);
-          db.collection('schedules').add(schedule.toMap()).then((value) {
-            db
-                .collection('notifications-admin')
-                .add(notification.toMap())
-                .then((value) {
-              db
-                  .collection('notifications-${barber.id}')
-                  .add(notification.toMap())
-                  .then((value) {
+              db.collection('users').doc(auth.currentUser.uid).collection('cart').add(schedule.toMap()).then((value) {
+              db.collection('notifications-admin').add(notification.toMap()).then((value) {
+              db.collection('notifications-${barber.id}').add(notification.toMap()).then((value) {
                 EasyLoading.showSuccess('Agendamento salvo com sucesso!');
-                Navigator.pushReplacementNamed(context, '/schedules');
+                Navigator.pushReplacementNamed(context, '/base');
               });
             });
           }).catchError((error) {
@@ -140,6 +143,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _confirmIsEmpty() async {
+
+    // TODO: DEPOIS DO CART
     await _getConfigs();
     var res = await db
         .collection('schedules')
@@ -153,6 +158,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _getschedules({DateTime date}) async {
+
+    // TODO: DEPOIS DO CART
     await _getConfigs();
     var res = await db
         .collection('schedules')
@@ -173,6 +180,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _isHoliday({DateTime holi}) async {
+
+    // TODO: DEPOIS DO CART
     easyLoading();
     await db
         .collection('holidays')
@@ -193,53 +202,48 @@ class _CalendarBarberState extends State<CalendarBarber> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Agendar'),
-        backgroundColor: bgColorLight,
-        elevation: 0,
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: bgColorLight,
-        child: SlidingSheet(
-          minHeight: 50,
-          color: Color(0xFFf5f5f5),
-          elevation: 8,
-          cornerRadius: 16,
-          headerBuilder: (context, state) => _headerSlide(),
-          snapSpec: const SnapSpec(
-            // Enable snapping. This is true by default.
-            snap: true,
-            // Set custom snapping points.
-            snappings: [0.25, 0.7, 1.0],
-            // Define to what the snappings relate to. In this case,
-            // the total available space that the sheet can expand to.
-            positioning: SnapPositioning.relativeToAvailableSpace,
+    return styleScreenPattern(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: Text('AGENDAR', style: TextStyle(color: Colors.black),),
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(color: Colors.black),
+          elevation: 0,
+          centerTitle: true,
+        ),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: Colors.transparent,
+          child: SlidingSheet(
+            minHeight: 50,
+            color: Color(0xFFf5f5f5),
+            elevation: 8,
+            cornerRadius: 16,
+            headerBuilder: (context, state) => _headerSlide(),
+            snapSpec: const SnapSpec(
+              snap: true,
+              snappings: [0.25, 0.7, 1.0],
+              positioning: SnapPositioning.relativeToAvailableSpace,
+            ),
+            body: _calendar(),
+            builder: (context, state) {
+              if (isHoliday == true) {
+                return Center(
+                  child: Text('hoje nao abriremos'),
+                );
+              } else {
+                return _bodySliding();
+              }
+            },
           ),
-          // The body widget will be displayed under the SlidingSheet
-          // and a parallax effect can be applied to it.
-          body: _calendar(),
-          builder: (context, state) {
-            // This is the content of the sheet that will get
-            // scrolled, if the content is bigger than the available
-            // height of the sheet.
-            if (isHoliday == true) {
-              return Center(
-                child: Text('hoje nao abriremos'),
-              );
-            } else {
-              return _bodySliding();
-            }
-          },
         ),
       ),
     );
   }
 
   _bodySliding() {
-    print(avalible);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -277,32 +281,32 @@ class _CalendarBarberState extends State<CalendarBarber> {
 
   _calendar() {
     return Container(
-      color: bgColorLight,
+      color: Colors.white,
       child: TableCalendar(
         availableGestures: AvailableGestures.horizontalSwipe,
         headerStyle: HeaderStyle(
-          titleTextStyle: TextStyle(color: Colors.white),
+          titleTextStyle: TextStyle(color: Colors.black),
           formatButtonVisible: false,
           leftChevronIcon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.white,
+            color: Colors.black,
             size: 14,
           ),
           rightChevronIcon: Icon(
             Icons.arrow_forward_ios,
-            color: Colors.white,
+            color: Colors.black,
             size: 14,
           ),
           centerHeaderTitle: true,
         ),
         daysOfWeekStyle: DaysOfWeekStyle(
-            weekendStyle: TextStyle(color: Colors.white),
-            weekdayStyle: TextStyle(color: Colors.white)),
+            weekendStyle: TextStyle(color: Colors.black),
+            weekdayStyle: TextStyle(color: Colors.black)),
         calendarStyle: CalendarStyle(
-          selectedColor: calendarSelected,
+          selectedColor: Theme.of(context).primaryColor,
           todayColor: todayColor,
-          weekdayStyle: TextStyle(color: Colors.white),
-          weekendStyle: TextStyle(color: Colors.white),
+          weekdayStyle: TextStyle(color: Colors.black),
+          weekendStyle: TextStyle(color: Colors.black),
         ),
         calendarController: _calendarController,
         onDaySelected: (day, events, holidays) async {
@@ -347,7 +351,6 @@ class _CalendarBarberState extends State<CalendarBarber> {
           title: Text(
             'Disponivel',
             style: TextStyle(),
-            // color: indexColor == index ? Colors.white : Colors.black87),
           ),
           trailing: Text(
             '$index:00',

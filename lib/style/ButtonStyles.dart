@@ -9,8 +9,9 @@ Widget btPrimary(
     width: MediaQuery.of(context).size.width,
     child: Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+      // ignore: deprecated_member_use
       child: RaisedButton(
-        color: accentColor,
+        color: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -38,6 +39,7 @@ Widget btSecondary(
       width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        // ignore: deprecated_member_use
         child: RaisedButton(
           color: bgColor,
           shape: RoundedRectangleBorder(
@@ -64,7 +66,7 @@ Widget btFlat(
     {@required Function call, @required String lable, @required context}) {
   return Padding(
     padding: const EdgeInsets.only(top: 16.0),
-    child: FlatButton(
+    child: TextButton(
       child: Text(
         lable,
         style: TextStyle(color: accentColor, fontSize: 14),

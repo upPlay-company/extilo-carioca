@@ -35,10 +35,10 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
               centerTitle: true,
               iconTheme: new IconThemeData(color: Colors.black),
               title: Text(
-                'EXTILO CARIOCA',
+                'ESCOLHA UM BARBEIRO',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Principal'),
               ),
