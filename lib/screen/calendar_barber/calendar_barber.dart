@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:extilo_carioca/helpers/convert_date.dart';
 import 'package:extilo_carioca/model/agendamento/Notify.dart';
-import 'package:extilo_carioca/model/agendamento/criar_agendamento.dart';
+import 'package:extilo_carioca/model/agendamento/agendamentos.dart';
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
 import 'package:extilo_carioca/model/servicos/servicos.dart';
 import 'package:extilo_carioca/screen/agendamento/components/EasyLoading.dart';
@@ -14,6 +14,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+// ignore: must_be_immutable
 class CalendarBarber extends StatefulWidget {
   @override
   _CalendarBarberState createState() => _CalendarBarberState(servico);
@@ -110,15 +111,12 @@ class _CalendarBarberState extends State<CalendarBarber> {
           Notify notification = Notify(
               customerName: username,
               date: daySelected,
-              type: 'Agendamento',
-              hour: hourSelected);
-              db.collection('users').doc(auth.currentUser.uid).collection('cart').add(schedule.toMap()).then((value) {
-              db.collection('notifications-admin').add(notification.toMap()).then((value) {
-              db.collection('notifications-${barber.id}').add(notification.toMap()).then((value) {
+              type: schedule.id,
+              hour: hourSelected,
+              price: schedule.servicePrice);
+              db.collection('schedules').add(schedule.toMap()).then((value) {
                 EasyLoading.showSuccess('Agendamento salvo com sucesso!');
-                Navigator.pushReplacementNamed(context, '/base');
-              });
-            });
+                Navigator.pushReplacementNamed(context, '/meus_agendamentos');
           }).catchError((error) {
             EasyLoading.showSuccess(
                 'hove algum problema por favor tente novamente !');
@@ -158,8 +156,6 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _getschedules({DateTime date}) async {
-
-    // TODO: DEPOIS DO CART
     await _getConfigs();
     var res = await db
         .collection('schedules')

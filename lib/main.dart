@@ -1,19 +1,24 @@
+import 'package:extilo_carioca/model/agendamento/agendamento_manager.dart';
 import 'package:extilo_carioca/model/home/banners_manager.dart';
 import 'package:extilo_carioca/model/produtos/product_manager.dart';
 import 'package:extilo_carioca/model/profissionais/profissionais_manager.dart';
 import 'package:extilo_carioca/model/servicos/service_manager.dart';
 import 'package:extilo_carioca/model/user/user_manager.dart';
 import 'package:extilo_carioca/screen/base/base_screen.dart';
+import 'package:extilo_carioca/screen/cart/cart_screen.dart';
 import 'package:extilo_carioca/screen/inicial/inicial_screen.dart';
 import 'package:extilo_carioca/screen/login/login_screen.dart';
 import 'package:extilo_carioca/screen/loyaltycard/loyalty_card.dart';
+import 'package:extilo_carioca/screen/meus_agendamentos/meus_agendamentos_screen.dart';
 import 'package:extilo_carioca/screen/profissionais/profissionais_screen.dart';
+import 'package:extilo_carioca/screen/servicos/lista_produtos/lista_all_produtos_screen.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
+import 'model/carrinho/cart_manager.dart';
 import 'model/unidades/unidades_manager.dart';
 import 'screen/agendamento/agendamento.dart';
 
@@ -41,6 +46,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => UserManager(),
           lazy: false,
+        ),
+        ChangeNotifierProxyProvider<UserManager, AgendamentosManager>(
+          create: (_) => AgendamentosManager(),
+          lazy: false,
+          update: (_, userManager, agendamentosManager) =>
+          agendamentosManager..updateUser(userManager.user),
+        ),
+        ChangeNotifierProxyProvider<UserManager, CartManager>(
+          create: (_) => CartManager(),
+          lazy: false,
+          update: (_, userManager, cartManager) =>
+          cartManager..updateUser(userManager),
         ),
         ChangeNotifierProvider(
           create: (_) => ServiceManager(),
@@ -71,6 +88,12 @@ class MyApp extends StatelessWidget {
           switch (settings.name) {
             case '/profissionais':
               return MaterialPageRoute(builder: (_) => ProfissionaisScreen());
+            case '/meus_agendamentos':
+              return MaterialPageRoute(builder: (_) => MeusAgendamentosScreen());
+            case '/Cart':
+              return MaterialPageRoute(builder: (_) => CartScreen());
+            case '/produtos':
+              return MaterialPageRoute(builder: (_) => ListAllProduct());
             case '/credito':
               return MaterialPageRoute(builder: (_) => LoyaltyCard());
             case '/agendamento':

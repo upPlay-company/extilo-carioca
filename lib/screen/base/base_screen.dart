@@ -1,5 +1,6 @@
 import 'package:extilo_carioca/model/page/page_manager.dart';
 import 'package:extilo_carioca/screen/home/home_screen.dart';
+import 'package:extilo_carioca/screen/meus_agendamentos/meus_agendamentos_screen.dart';
 import 'package:extilo_carioca/screen/minhaconta/minhaconta_screen.dart';
 import 'package:extilo_carioca/screen/unidades/unidades_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class BaseScreen extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           HomeScreen(),
-          Container(),
+          MeusAgendamentosScreen(),
           Container(),
           UnidadesScreen(),
           MinhaContaScreen(),

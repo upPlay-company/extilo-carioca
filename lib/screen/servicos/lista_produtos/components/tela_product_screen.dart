@@ -1,5 +1,8 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:extilo_carioca/model/carrinho/cart_manager.dart';
 import 'package:extilo_carioca/model/produtos/product.dart';
+import 'package:extilo_carioca/model/user/user_manager.dart';
+import 'package:extilo_carioca/screen/servicos/lista_produtos/components/size_widget.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +75,7 @@ class TelaProductScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'R\$ ${product.price.toStringAsFixed(2)}',
+                        'R\$ ${product.basePrice.toStringAsFixed(2)}',
                         style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -95,21 +98,44 @@ class TelaProductScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      const SizedBox(height: 20,),
-                      SizedBox(
-                        height: 44,
-                        child: RaisedButton(
-                          onPressed: (){
-                            // TODO: AÇÃO LISTA EM CARRINHO PARA COMPRA
-                          },
-                          color: Colors.black,
-                          textColor: Colors.white,
-                          child: Text(
-                            'Adicionar ao Carrinho',
-                            style: TextStyle(fontSize: 18),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16, bottom: 8),
+                        child: Text(
+                          'Tamanho:',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16
                           ),
                         ),
-                      )
+                      ),
+                      Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: product.sizes.map((s){
+                            return SizeWidget(size: s);
+                          }).toList()
+                      ),
+                      const SizedBox(height: 20,),
+                      if(product.hasStock)
+                        Consumer2<UserManager, Product>(
+                          builder: (_, userManager, product, __){
+                            return SizedBox(
+                              height: 44,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                onPressed: product.selectedSize != null ? (){
+                                    context.read<CartManager>().addToCard(product);
+                                    Navigator.of(context).pushNamed('/Cart');
+                                } : null,
+                                color: Colors.black,
+                                textColor: Colors.white,
+                                child: Text(
+                                  'Adicionar ao Carrinho', style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            );
+                          },
+                        )
                     ],
                   ),
                 )

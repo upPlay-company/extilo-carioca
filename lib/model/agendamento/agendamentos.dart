@@ -1,3 +1,6 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Schedule {
   String id;
   String nameCustomer;
@@ -39,6 +42,21 @@ class Schedule {
     this.servicePrice = servicePrice;
   }
 
+  Schedule.fromDocument(DocumentSnapshot document){
+    id = document.id;
+    nameCustomer = document.data()['nameCustomer'];
+    employeeId = document.data()['employeeId'];
+    date = document.data()['date'];
+    hour = document.data()['hour'];
+    concluded = document.data()['concluded'];
+    thumbnailCustomer = document.data()['thumbnailCustomer'];
+    nameEmployee = document.data()['nameEmployee'];
+    customerId = document.data()['customerId'];
+    serviceName = document.data()['serviceName'];
+    servicePrice = document.data()['servicePrice'];
+    serviceDuration = document.data()['serviceDuration'];
+  }
+
   toMap() {
     return {
       'nameCustomer': this.nameCustomer,
@@ -53,5 +71,10 @@ class Schedule {
       'servicePrice': this.servicePrice,
       'serviceDuration': this.serviceDuration
     };
+  }
+
+  @override
+  String toString() {
+    return 'Schedule{id: $id, nameCustomer: $nameCustomer, employeeId: $employeeId, date: $date, thumbnailCustomer: $thumbnailCustomer, nameEmployee: $nameEmployee, serviceName: $serviceName, serviceDuration: $serviceDuration, servicePrice: $servicePrice, hour: $hour, concluded: $concluded, customerId: $customerId}';
   }
 }

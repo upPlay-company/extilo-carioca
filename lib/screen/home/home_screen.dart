@@ -135,7 +135,9 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/produtos');
+                            },
                             child: Container(
                               height: 80,
                               width: 80,
@@ -149,7 +151,7 @@ class HomeScreen extends StatelessWidget {
                             height: 5,
                           ),
                           Text(
-                            'PACOTES',
+                            'PRODUTOS',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
