@@ -9,6 +9,7 @@ import 'package:extilo_carioca/style/ButtonStyles.dart';
 import 'package:extilo_carioca/style/Colors.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
@@ -44,6 +45,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
   int weekDay;
   DateTime daySelected;
   int hourSelected;
+  int minutosSelected;
 
   DateTime holiday;
   var daysWeek;
@@ -66,7 +68,6 @@ class _CalendarBarberState extends State<CalendarBarber> {
   _getUser() async {
     var user = await db.collection('users').doc(auth.currentUser.uid).get();
     username = user.data()['name'];
-    print(user);
   }
 
   void init() async {
@@ -99,6 +100,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
           Schedule schedule = Schedule(
               date: daySelected,
               hour: hourSelected,
+              minutos: minutosSelected,
               employeeId: barber.id,
               nameCustomer: username,
               thumbnailCustomer: auth.currentUser.email,
@@ -114,9 +116,9 @@ class _CalendarBarberState extends State<CalendarBarber> {
               type: schedule.id,
               hour: hourSelected,
               price: schedule.servicePrice);
-              db.collection('schedules').add(schedule.toMap()).then((value) {
-                EasyLoading.showSuccess('Agendamento salvo com sucesso!');
-                Navigator.pushReplacementNamed(context, '/meus_agendamentos');
+          db.collection('schedules').add(schedule.toMap()).then((value) {
+            EasyLoading.showSuccess('Agendamento salvo com sucesso!');
+            Navigator.pushReplacementNamed(context, '/base');
           }).catchError((error) {
             EasyLoading.showSuccess(
                 'hove algum problema por favor tente novamente !');
@@ -141,14 +143,13 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _confirmIsEmpty() async {
-
-    // TODO: DEPOIS DO CART
     await _getConfigs();
     var res = await db
         .collection('schedules')
         .where('employeeId', isEqualTo: barber.id)
         .where('date', isEqualTo: daySelected)
         .where('hour', isEqualTo: hourSelected)
+        .where('minutos', isEqualTo: minutosSelected)
         .get();
     List<DocumentSnapshot> documentsSnapshots = res.docs.toList();
 
@@ -163,9 +164,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
         .where('date', isEqualTo: daySelected)
         .get();
     List<DocumentSnapshot> documentsSnapshots = res.docs.toList();
-
-    documentsSnapshots.forEach((element) {
-      hours[element['hour']] = false;
+    documentsSnapshots.map((e) {
+      hours[e['hour']] = false;
     });
     setState(() {
       avalible = hours;
@@ -176,8 +176,6 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _isHoliday({DateTime holi}) async {
-
-    // TODO: DEPOIS DO CART
     easyLoading();
     await db
         .collection('holidays')
@@ -202,7 +200,10 @@ class _CalendarBarberState extends State<CalendarBarber> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('AGENDAR', style: TextStyle(color: Colors.black),),
+          title: Text(
+            'AGENDAR',
+            style: TextStyle(color: Colors.black),
+          ),
           backgroundColor: Colors.transparent,
           iconTheme: IconThemeData(color: Colors.black),
           elevation: 0,
@@ -245,15 +246,16 @@ class _CalendarBarberState extends State<CalendarBarber> {
       child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.60,
+            height: 50,
             child: ListView.builder(
               itemCount: avalible.length,
+              scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 if (avalible == null) {
                   return Center(
                     child: Text('horarios indisponivies'),
                   );
-                } else if (avalible[index] == true) {
+                } else if (avalible[index]['bool'] == true) {
                   return _listTile(enable: true, index: index);
                 } else {
                   return SizedBox();
@@ -327,37 +329,27 @@ class _CalendarBarberState extends State<CalendarBarber> {
     bool enable,
   }) {
     return Card(
-      //color: indexColor == index ? bgColorLight : Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          onTap: () async {
-            setState(() {
-              hourSelected = index;
-              indexColor = index;
-            });
-          },
-          enabled: enable,
-          leading: indexColor == index
-              ? Icon(
-                  Icons.check_circle_outline,
-                  color: Colors.green,
-                )
-              : SizedBox(),
-          title: Text(
-            'Disponivel',
-            style: TextStyle(),
-          ),
-          trailing: Text(
-            '$index:00',
-            style: TextStyle(
-              fontSize: 16,
+        color: indexColor == index ? Theme.of(context).primaryColor : Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+            onTap: () async {
+              setState(() {
+                hourSelected = avalible[index]['hour'];
+                minutosSelected = avalible[index]['minutos'];
+                indexColor = index;
+              });
+            },
+            child: Center(
+              child: Text(
+                '${avalible[index]['hour']}:${avalible[index]['minutos']}0',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
             ),
-            // color: indexColor == index ? Colors.white : Colors.black87),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget _headerSlide() {

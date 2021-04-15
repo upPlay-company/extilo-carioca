@@ -1,15 +1,15 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:extilo_carioca/model/order_produtos/order_produtos.dart';
 import 'package:extilo_carioca/model/user/user.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'agendamentos.dart';
-
-class AgendamentosManager extends ChangeNotifier {
+class OrdersManager extends ChangeNotifier {
 
   UserUser user;
 
-  List<Schedule> schedule = [];
+  List<OrderProducts> orders = [];
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -17,7 +17,7 @@ class AgendamentosManager extends ChangeNotifier {
 
   void updateUser(UserUser user){
     this.user = user;
-    schedule.clear();
+    orders.clear();
 
     _subscription?.cancel();
     if(user != null){
@@ -26,24 +26,15 @@ class AgendamentosManager extends ChangeNotifier {
   }
 
   void _listenToOrders(){
-    _subscription = firestore.collection('schedules')
-        .where('customerId', isEqualTo: user.id)
+    _subscription = firestore.collection('orders')
+        .where('user', isEqualTo: user.id)
         .snapshots().listen((event) {
-      schedule.clear();
+      orders.clear();
       for(final doc in event.docs){
-        schedule.add(Schedule.fromDocument(doc));
+        orders.add(OrderProducts.fromDocument(doc));
       }
       notifyListeners();
     });
-  }
-
-  void remove(Schedule schedule){
-    DocumentReference firestoreRef = firestore
-        .collection('schedules')
-        .doc(schedule.id);
-
-    firestoreRef.delete();
-    notifyListeners();
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:extilo_carioca/model/page/page_manager.dart';
 import 'package:extilo_carioca/screen/home/home_screen.dart';
 import 'package:extilo_carioca/screen/meus_agendamentos/meus_agendamentos_screen.dart';
 import 'package:extilo_carioca/screen/minhaconta/minhaconta_screen.dart';
+import 'package:extilo_carioca/screen/orders_products/orders_products_screen.dart';
 import 'package:extilo_carioca/screen/unidades/unidades_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class BaseScreen extends StatelessWidget {
         children: <Widget>[
           HomeScreen(),
           MeusAgendamentosScreen(),
-          Container(),
+          OrdersProductsScreen(),
           UnidadesScreen(),
           MinhaContaScreen(),
         ],

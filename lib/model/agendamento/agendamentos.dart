@@ -6,12 +6,14 @@ class Schedule {
   String nameCustomer;
   String employeeId;
   DateTime date;
+  Timestamp DateBanco;
   String thumbnailCustomer;
   String nameEmployee;
   String serviceName;
   String serviceDuration;
   int servicePrice;
   int hour;
+  int minutos;
   bool concluded;
   String customerId;
 
@@ -20,6 +22,7 @@ class Schedule {
       String employeeId,
       DateTime date,
       int hour,
+      int minutos,
       bool concluded,
       String thumbnailCustomer,
       String nameEmployee,
@@ -32,6 +35,7 @@ class Schedule {
     this.employeeId = employeeId;
     this.date = date;
     this.hour = hour;
+    this.minutos = minutos;
     this.concluded = concluded;
     this.thumbnailCustomer = thumbnailCustomer;
     this.nameEmployee = nameEmployee;
@@ -46,8 +50,9 @@ class Schedule {
     id = document.id;
     nameCustomer = document.data()['nameCustomer'];
     employeeId = document.data()['employeeId'];
-    date = document.data()['date'];
+    DateBanco = document.data()['date'];
     hour = document.data()['hour'];
+    minutos = document.data()['minutos'];
     concluded = document.data()['concluded'];
     thumbnailCustomer = document.data()['thumbnailCustomer'];
     nameEmployee = document.data()['nameEmployee'];
@@ -63,6 +68,7 @@ class Schedule {
       'employeeId': this.employeeId,
       'date': this.date,
       'hour': this.hour,
+      'minutos': this.minutos,
       'concluded': this.concluded,
       'thumbnailCustomer': this.thumbnailCustomer,
       'nameEmployee': this.nameEmployee,
@@ -75,6 +81,6 @@ class Schedule {
 
   @override
   String toString() {
-    return 'Schedule{id: $id, nameCustomer: $nameCustomer, employeeId: $employeeId, date: $date, thumbnailCustomer: $thumbnailCustomer, nameEmployee: $nameEmployee, serviceName: $serviceName, serviceDuration: $serviceDuration, servicePrice: $servicePrice, hour: $hour, concluded: $concluded, customerId: $customerId}';
+    return 'Schedule{id: $id, nameCustomer: $nameCustomer, employeeId: $employeeId, date: $date, DateBanco: $DateBanco, thumbnailCustomer: $thumbnailCustomer, nameEmployee: $nameEmployee, serviceName: $serviceName, serviceDuration: $serviceDuration, servicePrice: $servicePrice, hour: $hour, minutos: $minutos, concluded: $concluded, customerId: $customerId}';
   }
 }

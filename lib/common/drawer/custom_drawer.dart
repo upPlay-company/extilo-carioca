@@ -30,7 +30,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     DrawerTile(
                         iconData: Icons.query_builder,
-                        title: 'Histórico de Serviço',
+                        title: 'Meus Pedidos',
                         page: 2
                     ),
                     DrawerTile(
