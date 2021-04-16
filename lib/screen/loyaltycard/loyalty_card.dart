@@ -1,6 +1,8 @@
+import 'package:extilo_carioca/model/user/user_manager.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 class LoyaltyCard extends StatefulWidget {
   @override
@@ -8,10 +10,12 @@ class LoyaltyCard extends StatefulWidget {
 }
 
 class _LoyaltyCardState extends State<LoyaltyCard> {
-  double sizeIconSocial = 50;
 
   @override
   Widget build(BuildContext context) {
+
+    final userManager = context.watch<UserManager>();
+
     return styleScreenPattern(
       child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -19,80 +23,35 @@ class _LoyaltyCardState extends State<LoyaltyCard> {
             centerTitle: true,
             iconTheme: new IconThemeData(color: Colors.black),
             title: Text(
-              'EXTILO CARIOCA',
+              'FIDELIDADE',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 30,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Principal'),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          body: Stack(
+          body: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.10,
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(top: 50),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Color(0xff3c5a99),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 25.0),
-                  child: Center(
-                    child: Text(
-                      'Fidelidade',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  SizedBox(height: 50,),
+                  Text(
+                    "Seus créditos",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 26,
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.12),
-                child: Container(
-                  color: Colors.white,
-                  child: GridView.count(
-                    crossAxisCount: 5,
-                    children: [
-                      faithfulness(false),
-                      faithfulness(false),
-                      faithfulness(false),
-                      faithfulness(false),
-                      faithfulness(false),
-                      faithfulness(false),
-                      faithfulness(true),
-                      faithfulness(true),
-                      faithfulness(true),
-                      faithfulness(true),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: MediaQuery.of(context).size.width * 0.8,
-                left: MediaQuery.of(context).size.width * 0.1,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      "Faltam",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 35,
-                      ),
-                    ),
+                  if(userManager.user.credito != null)
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                       child: Text(
-                        "04",
+                        '${userManager.user.credito}',
                         style: TextStyle(
                           color: Color(0xff007e00),
                           fontWeight: FontWeight.w600,
@@ -100,77 +59,92 @@ class _LoyaltyCardState extends State<LoyaltyCard> {
                         ),
                       ),
                     ),
-                    Text(
-                      "Créditos",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 35,
-                      ),
-                    ),
+                  if(userManager.user.credito == null)
                     Padding(
-                      padding: const EdgeInsets.only(
-                        top: 80.0,
-                        bottom: 50,
-                      ),
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                       child: Text(
-                        "Troque seus créditos, vale 1 corte ou barba",
+                        '0',
                         style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 15,
+                          color: Color(0xff007e00),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 35,
                         ),
                       ),
                     ),
-                    Row(
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 40.0,
+                      bottom: 50,
+                    ),
+                    child: Column(
                       children: [
-                        Column(
+                        Text(
+                          "Troque seus créditos, por serviço na",
+                          style: TextStyle(
+                            color: Colors.grey[1000],
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          'Barbeario Extilo Carioca',
+                          style: TextStyle(
+                            color: Colors.grey[1000],
+                            fontSize: 16,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              launch(
+                                  'https://www.facebook.com/ExtiloCarioca/');
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'images/Icone face.png'))),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 50,
+                        ),
+                        child: Column(
                           children: [
                             GestureDetector(
                               onTap: () {
                                 launch(
-                                    'https://www.facebook.com/ExtiloCarioca/');
+                                    'https://www.instagram.com/extilocarioca/');
                               },
                               child: Container(
-                                height: sizeIconSocial,
-                                width: sizeIconSocial,
+                                height: 40,
+                                width: 40,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            'images/Icone face.png'))),
+                                            'images/icone insta.png'))),
                               ),
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 50,
-                          ),
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  launch(
-                                      'https://www.instagram.com/extilocarioca/');
-                                },
-                                child: Container(
-                                  height: sizeIconSocial,
-                                  width: sizeIconSocial,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'images/icone insta.png'))),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
+                      )
+                    ],
+                  )
+                ],
+              )
             ],
           )),
     );

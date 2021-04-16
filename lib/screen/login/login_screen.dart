@@ -210,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         SizedBox(
                                           height: 54,
                                           width: 200,
+                                          // ignore: deprecated_member_use
                                           child: RaisedButton(
                                             onPressed: userManager.loading ? null : (){
                                               if(formKey.currentState.validate()){

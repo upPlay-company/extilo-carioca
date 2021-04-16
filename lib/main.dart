@@ -21,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
-
 import 'model/carrinho/cart_manager.dart';
 import 'model/order_produtos/order_manager.dart';
 import 'model/unidades/unidades_manager.dart';

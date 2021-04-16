@@ -18,10 +18,14 @@ class UserUser extends ChangeNotifier {
     datanasc = document.data()['nascimento'] as String;
     phone = document.data()['phone'] as String;
     _faithfulness = document.data()['faithfulness'] as List<bool>;
+    if(document.data().containsKey('credito')){
+      credito = document.data()['credito'];
+    }
   }
 
   String id, name, email, password, datanasc, phone, confirmPassword, newPass;
   List<bool> _faithfulness;
+  int credito;
 
   List get faithfulness => _faithfulness;
 
