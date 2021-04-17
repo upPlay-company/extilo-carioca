@@ -172,11 +172,13 @@ class MinhaContaScreen extends StatelessWidget {
                               SizedBox(
                                 height: 54,
                                 width: 200,
+                                // ignore: deprecated_member_use
                                 child: RaisedButton(
                                   onPressed: !userManager.user.loading ? () async {
                                       if(formKey.currentState.validate()){
                                         formKey.currentState.save();
                                         await userManager.user.save();
+                                        // ignore: deprecated_member_use
                                         scaffoldKey.currentState.showSnackBar(
                                           SnackBar(
                                             content: const Text('Cadastro atualizado com sucesso!',

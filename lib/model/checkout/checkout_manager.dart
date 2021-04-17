@@ -54,10 +54,10 @@ class CheckoutManager extends ChangeNotifier {
       final result = await firestore.runTransaction((tx) async {
         final doc = await tx.get(ref);
         final orderId = doc.data()['current'] as int;
-        await tx.update(ref, {'current': orderId + 1});
+        tx.update(ref, {'current': orderId + 1});
         return {'orderId': orderId};
       });
-      return result['orderId'] as int;
+      return result['orderId'];
     } catch (e){
       debugPrint(e.toString());
       return Future.error('Falha ao gerar o numero do pedido');

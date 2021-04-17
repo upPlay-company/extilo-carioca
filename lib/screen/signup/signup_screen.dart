@@ -270,11 +270,13 @@ class SignUpScreen extends StatelessWidget {
                                           SizedBox(
                                             height: 54,
                                             width: 200,
+                                            // ignore: deprecated_member_use
                                             child: RaisedButton(
                                               onPressed: userManager.loading ? null : (){
                                                 if(formKey.currentState.validate()){
                                                   formKey.currentState.save();
                                                   if(user.password != user.confirmPassword){
+                                                    // ignore: deprecated_member_use
                                                     scaffoldKey.currentState.showSnackBar(
                                                       SnackBar(
                                                         content: const Text('Senhas não coincidem!',
@@ -295,6 +297,7 @@ class SignUpScreen extends StatelessWidget {
                                                       Navigator.of(context).pushNamed('/base');
                                                     },
                                                     onFail: (e){
+                                                      // ignore: deprecated_member_use
                                                       scaffoldKey.currentState.showSnackBar(
                                                         SnackBar(
                                                           content: Text('Falha ao cadastrar: $e',

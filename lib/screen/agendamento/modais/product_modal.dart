@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+// ignore: must_be_immutable
 class ProductModal extends StatelessWidget {
   ProductModal({this.selected, this.createStore});
 
@@ -38,12 +39,6 @@ class ProductModal extends StatelessWidget {
           child: ListView.separated(
               itemBuilder: (_, index) {
                 final servProduct = agendamentoStore.productList[index];
-                final fontStyle = TextStyle(
-                  fontSize: 17,
-                  fontWeight: servProduct.id == selected?.id
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                );
                 return InkWell(
                   splashColor: Colors.blueGrey[200],
                   onTap: () {

@@ -74,10 +74,20 @@ class TelaProductScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      if(product.hasStock == true)
+                        Text(
+                          'R\$ ${product.basePrice.toStringAsFixed(2)}',
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black
+                          ),
+                        ),
+                      if(product.hasStock == false)
                       Text(
-                        'R\$ ${product.basePrice.toStringAsFixed(2)}',
+                        'Produto sem estoque',
                         style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black
                         ),

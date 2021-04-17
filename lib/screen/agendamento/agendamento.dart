@@ -81,17 +81,6 @@ class _SchedulingScreenState extends State<SchedulingScreen> {
     );
   }
 
-  void _showModalDate() {
-    showModalBottomSheet<void>(
-      shape: styleShape,
-      backgroundColor: Colors.black,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return modelContainer();
-      },
-    );
-  }
 
   Container modelContainer({Widget child}) {
     return Container(

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:824666285542:android:eaa36a69e81073a02ca227",
+        "mobilesdk_app_id": "1:824666285542:android:449a42f65f3137aa2ca227",
         "android_client_info": {
-          "package_name": "com.example.extilo_carioca"
+          "package_name": "com.extilo_carioca"
         }
       },
       "oauth_client": [

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:extilo_carioca/helpers/convert_date.dart';
-import 'package:extilo_carioca/model/agendamento/Notify.dart';
 import 'package:extilo_carioca/model/agendamento/agendamentos.dart';
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
 import 'package:extilo_carioca/model/servicos/servicos.dart';
@@ -110,12 +109,6 @@ class _CalendarBarberState extends State<CalendarBarber> {
               serviceName: servico.name,
               serviceDuration: servico.duracao,
               servicePrice: servico.price);
-          Notify notification = Notify(
-              customerName: username,
-              date: daySelected,
-              type: schedule.id,
-              hour: hourSelected,
-              price: schedule.servicePrice);
           db.collection('schedules').add(schedule.toMap()).then((value) {
             EasyLoading.showSuccess('Agendamento salvo com sucesso!');
             Navigator.pushReplacementNamed(context, '/base');
@@ -156,6 +149,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
     return documentsSnapshots.isEmpty;
   }
 
+  // ignore: unused_element
   _getschedules({DateTime date}) async {
     await _getConfigs();
     var res = await db

@@ -19,7 +19,7 @@ class BannersTile extends StatelessWidget {
           aspectRatio: 2.0,
           enlargeCenterPage: true,
         ),
-        itemBuilder: (_, index){
+        itemBuilder: (_, index, __){
           return Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),

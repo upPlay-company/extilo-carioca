@@ -169,8 +169,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                     GestureDetector(
-                                      onTap: () {
-                                        // TODO: IMPLEMENTAR ENTRAR COM FACEBOOK
+                                      onTap: (){
+                                          userManager.facebookLogin(
+                                            onFail: (e){
+                                              // ignore: deprecated_member_use
+                                              scaffoldKey.currentState.showSnackBar(
+                                                  SnackBar(
+                                                    content: Text('Falha no login: $e',
+                                                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                                                    ),
+                                                    backgroundColor: Colors.blue,
+                                                    behavior: SnackBarBehavior.floating,
+                                                    margin: EdgeInsets.all(16),
+                                                    duration: Duration(seconds: 2),
+                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                                                  )
+                                              );
+                                            },
+                                            onSuccess: (){
+                                              Navigator.of(context).pushNamed('/base');
+                                            },
+                                          );
                                       },
                                       child: Padding(
                                         padding:
@@ -220,6 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       password: passController.text
                                                   ),
                                                   onFail: (e){
+                                                    // ignore: deprecated_member_use
                                                     scaffoldKey.currentState.showSnackBar(
                                                         SnackBar(
                                                           content: Text('Falha no login: $e',

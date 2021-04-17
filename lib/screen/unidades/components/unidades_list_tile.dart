@@ -50,10 +50,12 @@ class UnidadesListTile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              FlatButton(
-                textColor: Colors.green,
+              TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  primary: Colors.green,
+                ),
                 child: Icon(LineIcons.whatsapp),
-                padding: EdgeInsets.zero,
                 onPressed: (){
                   // TODO: VERIFICAR NO CELL REAL
                   dynamic main;
@@ -61,19 +63,23 @@ class UnidadesListTile extends StatelessWidget {
                   print(main);
                 },
               ),
-              FlatButton(
+              TextButton(
                 child: Icon(LineIcons.map),
-                textColor: Theme.of(context).primaryColor,
-                padding: EdgeInsets.zero,
+                style: TextButton.styleFrom(
+                  primary: Theme.of(context).primaryColor,
+                  padding: EdgeInsets.zero,
+                ),
                 onPressed: () async {
                   launch("https://www.google.com/maps/search/?api=1&query=${unidades.lat},"
                       "${unidades.long}");
                 },
               ),
-              FlatButton(
+              TextButton(
+                style: TextButton.styleFrom(
+                  primary: Theme.of(context).primaryColor,
+                  padding: EdgeInsets.zero,
+                ),
                 child: Icon(LineIcons.phone),
-                textColor: Theme.of(context).primaryColor,
-                padding: EdgeInsets.zero,
                 onPressed: (){
                   launch("tel:${unidades.phone}");
                 },

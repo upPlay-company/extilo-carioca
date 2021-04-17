@@ -3,6 +3,7 @@ import 'package:extilo_carioca/helpers/firebase.error.dart';
 import 'package:extilo_carioca/model/user/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class UserManager extends ChangeNotifier {
   UserManager() {
@@ -21,6 +22,13 @@ class UserManager extends ChangeNotifier {
   bool get loading => _loading;
 
   bool get isLoggedIn => user != null;
+
+  bool _loadingFacebook = false;
+  bool get loadingFacebook => _loadingFacebook;
+  set loadingFacebook(bool value) {
+    _loadingFacebook = value;
+    notifyListeners();
+  }
 
   Future<void> signIn(
       {UserUser user, Function onFail, Function onSuccess}) async {
@@ -54,12 +62,52 @@ class UserManager extends ChangeNotifier {
 
       await user.saveData();
 
+      user.saveToken();
+
       onSuccess();
     } on FirebaseAuthException catch (e) {
       onFail(getErrorString(e.code));
       print(e);
     }
     loading = false;
+  }
+
+  Future<void> facebookLogin({Function onFail, Function onSuccess}) async {
+    loadingFacebook = true;
+
+    final result = await FacebookLogin().logIn(['email', 'public_profile']);
+
+    switch(result.status){
+      case FacebookLoginStatus.loggedIn:
+        final credential = FacebookAuthProvider.credential(
+            result.accessToken.token
+        );
+
+        final authResult = await auth.signInWithCredential(credential);
+
+        if(authResult != null){
+          final firebaseUser = authResult.user;
+
+          user = UserUser(
+              id: firebaseUser.uid,
+              name: firebaseUser.displayName,
+              email: firebaseUser.email
+          );
+
+          await user.saveData();
+
+          user.saveToken();
+
+          onSuccess();
+        }
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        break;
+      case FacebookLoginStatus.error:
+        onFail(result.errorMessage);
+        break;
+    }
+    loadingFacebook = false;
   }
 
   void signOut() {
@@ -79,6 +127,8 @@ class UserManager extends ChangeNotifier {
       final DocumentSnapshot docUser =
           await firestore.collection('users').doc(currentUser.uid).get();
       user = UserUser.fromDocument(docUser);
+
+      user.saveToken();
       notifyListeners();
     }
   }

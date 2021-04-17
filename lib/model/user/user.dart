@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserUser extends ChangeNotifier {
@@ -34,6 +36,9 @@ class UserUser extends ChangeNotifier {
 
   CollectionReference get cartReference =>
       firestoreRef.collection('cart');
+
+  CollectionReference get tokensReference =>
+      firestoreRef.collection('tokens');
 
   Future<void> saveData() async {
     await firestoreRef.set(toMap());
@@ -73,5 +78,14 @@ class UserUser extends ChangeNotifier {
     }
 
     loading = false;
+  }
+
+  Future<void> saveToken() async {
+    final token = await FirebaseMessaging.instance.getToken();
+    tokensReference.doc(token).set({
+      'token': token,
+      'updateAt': FieldValue.serverTimestamp(),
+      'platform': Platform.operatingSystem
+    });
   }
 }

@@ -46,13 +46,22 @@ class ProductListTile extends StatelessWidget {
                         maxLines: 2,
                       ),
                       SizedBox(height: 10,),
-                      Text('R\$${product.basePrice.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Principal'
-                        ),
-                      )
+                      if(product.hasStock == true)
+                        Text('R\$${product.basePrice.toStringAsFixed(2)}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Principal'
+                          ),
+                        )
+                      else
+                        Text('Produto sem estoque',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Principal'
+                          ),
+                        )
                     ],
                   ),
                 ),

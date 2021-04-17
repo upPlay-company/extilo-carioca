@@ -6,7 +6,7 @@ dateConvert(DateTime data, slice) {
     String mes = dataFormat[1];
     String ano = dataFormat[0];
 
-    return ("${dia}/${mes}/${ano}");
+    return ("$dia/$mes/$ano");
   } else {
     return '';
   }
@@ -20,7 +20,7 @@ DateTime dateUtc(DateTime data, slice) {
     String mes = dataFormat[1];
     String ano = dataFormat[0];
 
-    return DateTime.parse("${ano}-${mes}-${dia}");
+    return DateTime.parse("$ano-$mes-$dia");
   } else {
     return null;
   }

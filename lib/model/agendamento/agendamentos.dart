@@ -6,6 +6,7 @@ class Schedule {
   String nameCustomer;
   String employeeId;
   DateTime date;
+  // ignore: non_constant_identifier_names
   Timestamp DateBanco;
   String thumbnailCustomer;
   String nameEmployee;
