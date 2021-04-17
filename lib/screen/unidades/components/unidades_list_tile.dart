@@ -64,7 +64,7 @@ class UnidadesListTile extends StatelessWidget {
                 },
               ),
               TextButton(
-                child: Icon(LineIcons.map),
+                child: Icon(Icons.location_pin),
                 style: TextButton.styleFrom(
                   primary: Theme.of(context).primaryColor,
                   padding: EdgeInsets.zero,
