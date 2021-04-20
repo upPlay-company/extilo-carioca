@@ -8,15 +8,16 @@ class Servicos {
     name = document.data()['name'] as String;
     price = document.data()['price'] as int;
     duracao = document.data()['duracao'] as String;
-    img = List<String>.from(document.data()['img'] as List<dynamic>);
+    description = document.data()['descricao'] as String;
+    category = document.data()['categoria'] as String;
   }
 
-  String id, duracao, name;
+  String id, duracao, name, description;
   int price;
-  List<String> img;
+  String category;
 
   @override
   String toString() {
-    return 'Servicos{id: $id, name: $name, price: $price, duracao: $duracao, img: $img}';
+    return 'Servicos{id: $id, duracao: $duracao, name: $name, description: $description, price: $price}';
   }
 }
