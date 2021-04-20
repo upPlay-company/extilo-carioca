@@ -16,6 +16,7 @@ import 'package:extilo_carioca/screen/meus_agendamentos/meus_agendamentos_screen
 import 'package:extilo_carioca/screen/profissionais/profissionais_screen.dart';
 import 'package:extilo_carioca/screen/servicos/lista_produtos/lista_all_produtos_screen.dart';
 import 'package:extilo_carioca/store/agendamento_store.dart';
+import 'package:extilo_carioca/store/list_agendamentos_store.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -35,6 +36,7 @@ void main() async {
 
 void setupLocation() {
   GetIt.I.registerSingleton(AgendamentoStore());
+  GetIt.I.registerSingleton(ListAgendamentoStore());
   GetIt.I.registerSingleton(UserManager());
   GetIt.I.registerSingleton(AgendamentosManager());
 }

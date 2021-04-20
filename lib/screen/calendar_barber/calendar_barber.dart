@@ -4,6 +4,7 @@ import 'package:extilo_carioca/model/agendamento/agendamentos.dart';
 import 'package:extilo_carioca/model/profissionais/profissionais.dart';
 import 'package:extilo_carioca/model/servicos/servicos.dart';
 import 'package:extilo_carioca/screen/agendamento/components/EasyLoading.dart';
+import 'package:extilo_carioca/store/list_agendamentos_store.dart';
 import 'package:extilo_carioca/style/ButtonStyles.dart';
 import 'package:extilo_carioca/style/Colors.dart';
 import 'package:extilo_carioca/style/style_screen_pattern.dart';
@@ -11,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get_it/get_it.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -32,6 +34,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
   CalendarController _calendarController = CalendarController();
 
   _CalendarBarberState(this.servico);
+
+  final ListAgendamentoStore agendamentoStore = GetIt.I<ListAgendamentoStore>();
 
   String username;
   String thumbnailUser;

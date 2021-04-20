@@ -1,5 +1,6 @@
 import 'package:extilo_carioca/model/agendamento/agendamento_manager.dart';
 import 'package:extilo_carioca/model/agendamento/agendamentos.dart';
+import 'package:extilo_carioca/screen/meus_agendamentos/components/pesquisa_satisfacao.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,15 +48,31 @@ class OrderTile extends StatelessWidget {
                   builder: (_, agendamentoManager, __){
                     return Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20, top: 10),
-                      child: ElevatedButton(
-                          onPressed: (){
-                            agendamentoManager.remove(schedule);
-                          },
-                          style: ElevatedButton.styleFrom(primary: Colors.red),
-                          child: Text('Cancelar Agendamento', style: TextStyle(fontSize: 16),)
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ElevatedButton(
+                              onPressed: (){
+                                agendamentoManager.remove(schedule);
+                              },
+                              style: ElevatedButton.styleFrom(primary: Colors.red),
+                              child: Text('Cancelar Agendamento', style: TextStyle(fontSize: 16))
+                          ),
+                        ],
                       ),
                     );
-                  })
+                  }),
+            if(schedule.concluded == true)
+              Padding(
+                padding: const EdgeInsets.only(left: 20,right: 20, top: 10),
+                child: ElevatedButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => PesquisaSatisfacao(schedule: schedule)));
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.white),
+                    child: Text('Avaliar Serviço', style: TextStyle(fontSize: 16, color: Colors.black))
+                ),
+              )
           ],
         ),
       ),
