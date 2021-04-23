@@ -17,6 +17,11 @@ class Schedule {
   int minutos;
   bool concluded;
   String customerId;
+  bool avaliacao;
+
+  int qualidadeServico;
+  int qualidadeAtendimento;
+  int tempoAtendimento;
 
   Schedule(
       {String nameCustomer,
@@ -25,6 +30,7 @@ class Schedule {
       int hour,
       int minutos,
       bool concluded,
+      bool avaliacao,
       String thumbnailCustomer,
       String nameEmployee,
       String id,
@@ -38,6 +44,7 @@ class Schedule {
     this.hour = hour;
     this.minutos = minutos;
     this.concluded = concluded;
+    this.avaliacao = avaliacao;
     this.thumbnailCustomer = thumbnailCustomer;
     this.nameEmployee = nameEmployee;
     this.id = id;
@@ -55,6 +62,7 @@ class Schedule {
     hour = document.data()['hour'];
     minutos = document.data()['minutos'];
     concluded = document.data()['concluded'];
+    avaliacao = document.data()['avaliacao'];
     thumbnailCustomer = document.data()['thumbnailCustomer'];
     nameEmployee = document.data()['nameEmployee'];
     customerId = document.data()['customerId'];
@@ -71,6 +79,7 @@ class Schedule {
       'hour': this.hour,
       'minutos': this.minutos,
       'concluded': this.concluded,
+      'avaliacao': this.avaliacao,
       'thumbnailCustomer': this.thumbnailCustomer,
       'nameEmployee': this.nameEmployee,
       'customerId': this.customerId,
@@ -82,6 +91,6 @@ class Schedule {
 
   @override
   String toString() {
-    return 'Schedule{id: $id, nameCustomer: $nameCustomer, employeeId: $employeeId, date: $date, DateBanco: $DateBanco, thumbnailCustomer: $thumbnailCustomer, nameEmployee: $nameEmployee, serviceName: $serviceName, serviceDuration: $serviceDuration, servicePrice: $servicePrice, hour: $hour, minutos: $minutos, concluded: $concluded, customerId: $customerId}';
+    return 'Schedule{id: $id, nameCustomer: $nameCustomer, employeeId: $employeeId, date: $date, DateBanco: $DateBanco, thumbnailCustomer: $thumbnailCustomer, nameEmployee: $nameEmployee, serviceName: $serviceName, serviceDuration: $serviceDuration, servicePrice: $servicePrice, hour: $hour, minutos: $minutos, concluded: $concluded, customerId: $customerId, avaliacao: $avaliacao, qualidadeServico: $qualidadeServico, qualidadeAtendimento: $qualidadeAtendimento, tempoAtendimento: $tempoAtendimento}';
   }
 }

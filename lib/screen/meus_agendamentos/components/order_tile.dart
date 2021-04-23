@@ -1,6 +1,6 @@
 import 'package:extilo_carioca/model/agendamento/agendamento_manager.dart';
 import 'package:extilo_carioca/model/agendamento/agendamentos.dart';
-import 'package:extilo_carioca/screen/meus_agendamentos/components/pesquisa_satisfacao.dart';
+import 'package:extilo_carioca/screen/meus_agendamentos/components/pesquisa_satisfacao_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,17 +62,24 @@ class OrderTile extends StatelessWidget {
                       ),
                     );
                   }),
-            if(schedule.concluded == true)
-              Padding(
-                padding: const EdgeInsets.only(left: 20,right: 20, top: 10),
-                child: ElevatedButton(
-                    onPressed: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_) => PesquisaSatisfacao(schedule: schedule)));
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.white),
-                    child: Text('Avaliar Serviço', style: TextStyle(fontSize: 16, color: Colors.black))
+            if(schedule.avaliacao == false)
+              if(schedule.concluded == true)
+                Padding(
+                  padding: const EdgeInsets.only(left: 20,right: 20, top: 10),
+                  child: ElevatedButton(
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => PesquisaSatisfacaoScreen(schedule: schedule)));
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.white),
+                      child: Text('Avaliar Serviço', style: TextStyle(fontSize: 16, color: Colors.black))
+                  ),
                 ),
-              )
+            SizedBox(height: 5,),
+            if(schedule.avaliacao == true)
+              Container(
+              padding: EdgeInsets.all(8),
+              color: Colors.white,
+              child: Center(child: Text("Avaliado", style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500))))
           ],
         ),
       ),

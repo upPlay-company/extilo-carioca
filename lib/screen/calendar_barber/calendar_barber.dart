@@ -108,6 +108,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
               nameCustomer: username,
               thumbnailCustomer: auth.currentUser.email,
               concluded: false,
+              avaliacao: false,
               customerId: auth.currentUser.uid,
               nameEmployee: barber.name,
               serviceName: servico.name,
