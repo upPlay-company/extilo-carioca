@@ -62,6 +62,7 @@ class MeusAgendamentosScreen extends StatelessWidget {
               );
             }
             return ListView.builder(
+              padding: EdgeInsets.only(bottom: 70),
               itemCount: agendamentoManager.schedule.length,
               itemBuilder: (_, index){
                 return OrderTile(

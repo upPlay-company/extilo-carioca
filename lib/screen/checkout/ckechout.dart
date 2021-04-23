@@ -21,7 +21,7 @@ class CheckoutScreen extends StatelessWidget {
             key: scaffoldKey,
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              title: const Text('Pagamento', style: TextStyle(color: Colors.black),),
+              title: const Text('Confirmação', style: TextStyle(color: Colors.black),),
               centerTitle: true,
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -44,7 +44,7 @@ class CheckoutScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 16,),
                             Text(
-                              'Processando seu pagamento...',
+                              'Confirmando seu pedido...',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w800,
