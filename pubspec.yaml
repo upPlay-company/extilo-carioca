@@ -52,6 +52,7 @@ dependencies:
   firebase_messaging_platform_interface: ^2.1.1
   url_launcher_platform_interface: ^2.0.0-nullsafety
   plugin_platform_interface: ^2.0.0
+  flutter_launcher_icons: ^0.9.0
 
 
 
@@ -110,3 +111,8 @@ flutter:
     - family: Principal
       fonts:
         - asset: images\fonts\Nunito-Regular.ttf
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "images/logo_pronto.png"

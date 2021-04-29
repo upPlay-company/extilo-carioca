@@ -9,7 +9,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="extilo_carioca"
+        android:label="Extilo Carioca"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

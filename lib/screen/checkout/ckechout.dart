@@ -72,7 +72,6 @@ class CheckoutScreen extends StatelessWidget {
                                   '/confirmation',
                                   arguments: order
                               );
-                              Navigator.of(context).pushNamed('/base');
                             });
                       },
                     )

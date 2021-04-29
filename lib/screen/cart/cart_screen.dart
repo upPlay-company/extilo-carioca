@@ -37,7 +37,7 @@ class CartScreen extends StatelessWidget {
                       CartTile(cartProduct)).toList(),
                 ),
                 PriceCard(
-                  buttonText: 'Continuar para pagamento',
+                  buttonText: 'Continuar para confirmação',
                   onPressed: cartManager.isCartValid ? (){
                     Navigator.of(context).pushNamed('/checkout');
                   } : null,
