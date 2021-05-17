@@ -25,7 +25,7 @@ class OrderTile extends StatelessWidget {
             SizedBox(height: 5),
             Text("Data: ${schedule.DateBanco.toDate().day}/${schedule.DateBanco.toDate().month}/${schedule.DateBanco.toDate().year}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
             SizedBox(height: 5),
-            Text("Hora: ${schedule.hour} horas", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+            Text("Hora: ${schedule.hour}:${schedule.minutos}0 horas", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
             SizedBox(height: 5),
             Text("Preço: R\$${schedule.servicePrice.toStringAsFixed(2)}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
             SizedBox(height: 5),

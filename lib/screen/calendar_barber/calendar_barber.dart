@@ -53,6 +53,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
   DateTime holiday;
   var daysWeek;
   var hours;
+  var minutos;
   var avalible = [];
 
   bool isHoliday = false;
@@ -64,8 +65,6 @@ class _CalendarBarberState extends State<CalendarBarber> {
     barber = widget.barber;
     _getUser();
     init();
-
-    //DateTime now = DateTime.now();
   }
 
   _getUser() async {
@@ -95,7 +94,9 @@ class _CalendarBarberState extends State<CalendarBarber> {
       DateTime now = dateUtc(DateTime.now(), '-');
       if (daySelected.isBefore(now)) {
         EasyLoading.showError('Data anterior ao dia de Atual!');
-      } else if (hourSelected != null) {
+      } else if (daySelected.day < DateTime.now().day && hourSelected < DateTime.now().hour) {
+        EasyLoading.showError('Selecione um horário maior que a hora atual');
+      } else if(hourSelected != null) {
         easyLoading();
         var isEmpty = await _confirmIsEmpty();
 
@@ -122,7 +123,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
                 'hove algum problema por favor tente novamente !');
           });
         } else {
-          EasyLoading.showError('Horario indisponivel!');
+          EasyLoading.showError('Horario já reservado!');
         }
       } else {
         EasyLoading.showError('Selecione um horário');
@@ -140,8 +141,17 @@ class _CalendarBarberState extends State<CalendarBarber> {
     });
   }
 
+  _getConfigsMinutos() async {
+    var res = await db.collection('configurations').doc('config_minutos').get();
+    setState(() {
+      minutos = res.data()['minutos'];
+      print(minutos);
+    });
+  }
+
   _confirmIsEmpty() async {
     await _getConfigs();
+    await _getConfigsMinutos();
     var res = await db
         .collection('schedules')
         .where('employeeId', isEqualTo: barber.id)
@@ -157,14 +167,15 @@ class _CalendarBarberState extends State<CalendarBarber> {
   // ignore: unused_element
   _getschedules({DateTime date}) async {
     await _getConfigs();
+    await _getConfigsMinutos();
     var res = await db
         .collection('schedules')
         .where('employeeId', isEqualTo: barber.id)
         .where('date', isEqualTo: daySelected)
         .get();
     List<DocumentSnapshot> documentsSnapshots = res.docs.toList();
-    documentsSnapshots.map((e) {
-      hours[e['hour']] = false;
+    documentsSnapshots.asMap().forEach((index, e) {
+
     });
     setState(() {
       avalible = hours;
@@ -227,7 +238,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
             builder: (context, state) {
               if (isHoliday == true) {
                 return Center(
-                  child: Text('hoje nao abriremos'),
+                  child: Text('Não Abriremos nessa data',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                 );
               } else {
                 return _bodySliding();

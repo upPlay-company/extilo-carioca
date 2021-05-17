@@ -231,39 +231,7 @@ class SignUpScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      GestureDetector(
-                                        onTap: (){
-                                          // TODO: IMPLEMENTAR ENTRAR COM FACEBOOK
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                height: 25,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage('images/Icone face.png'),
-                                                        fit: BoxFit.contain
-                                                    )
-                                                ),
-                                              ),
-                                              SizedBox(width: 10,),
-                                              Text(
-                                                'Entrar com o facebook',
-                                                style: TextStyle(
-                                                    color: Theme.of(context).primaryColor,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontFamily: 'Principal'
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      SizedBox(height: 20,),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
