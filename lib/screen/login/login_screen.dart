@@ -46,7 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.transparent,
         key: scaffoldKey,
         body: Center(
-          child: SingleChildScrollView(child: Consumer<UserManager>(
+          child: SingleChildScrollView(
+            child: Consumer<UserManager>(
             builder: (_, userManager, __) {
               return Column(
                 children: [
@@ -56,8 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Column(
                           children: [
                             Container(
-                              height: 300,
-                              width: 300,
+                              height: 270,
+                              width: 270,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('images/logo_pronto.png'),
@@ -168,61 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: (){
-                                          userManager.facebookLogin(
-                                            onFail: (e){
-                                              // ignore: deprecated_member_use
-                                              scaffoldKey.currentState.showSnackBar(
-                                                  SnackBar(
-                                                    content: Text('Falha no login: $e',
-                                                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
-                                                    ),
-                                                    backgroundColor: Colors.blue,
-                                                    behavior: SnackBarBehavior.floating,
-                                                    margin: EdgeInsets.all(16),
-                                                    duration: Duration(seconds: 2),
-                                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                                                  )
-                                              );
-                                            },
-                                            onSuccess: (){
-                                              Navigator.of(context).pushNamed('/base');
-                                            },
-                                          );
-                                      },
-                                      child: Padding(
-                                        padding:
-                                        EdgeInsets.fromLTRB(20, 20, 20, 20),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                              height: 25,
-                                              width: 25,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'images/Icone face.png'),
-                                                    fit: BoxFit.contain),),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              'Entrar com o facebook',
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily: 'Principal'),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    SizedBox(height: 15,),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [

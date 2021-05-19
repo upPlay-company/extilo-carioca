@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:extilo_carioca/helpers/validators.dart';
 import 'package:extilo_carioca/model/user/user.dart';
 import 'package:extilo_carioca/model/user/user_manager.dart';
@@ -29,6 +30,7 @@ class SignUpScreen extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
+                      margin: EdgeInsets.only(top: 40),
                       color: Colors.transparent,
                       child: Center(
                           child: Column(
@@ -133,6 +135,41 @@ class SignUpScreen extends StatelessWidget {
                                                   borderSide: BorderSide(color: Colors.black)
                                               ),
                                               labelText: 'Data de nascimento',
+                                              labelStyle: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Colors.black,
+                                                  fontFamily: 'Principal'
+                                              )
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.number,
+                                          autocorrect: false,
+                                          enabled: !userManager.loading,
+                                          validator: (phone){
+                                            if(phone.isEmpty)
+                                              return 'Campo obrigatório';
+                                            if(phone.length < 15)
+                                              return 'Formato inválido';
+                                            return null;
+                                          },
+                                          inputFormatters: [
+                                            // ignore: deprecated_member_use
+                                            WhitelistingTextInputFormatter.digitsOnly,
+                                            TelefoneInputFormatter(),
+                                          ],
+                                          onSaved: (phone) => user.phone = phone,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                          decoration: InputDecoration(
+                                              enabledBorder: UnderlineInputBorder(
+                                                  borderSide: BorderSide(color: Colors.black)
+                                              ),
+                                              labelText: 'Telefone',
                                               labelStyle: TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.black,
