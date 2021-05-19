@@ -22,7 +22,7 @@ class BaseScreen extends StatelessWidget {
         children: <Widget>[
           HomeScreen(),
           MeusAgendamentosScreen(),
-          OrdersProductsScreen(),
+          // OrdersProductsScreen(),
           UnidadesScreen(),
           MinhaContaScreen(),
         ],

@@ -88,13 +88,13 @@ class CheckoutManager extends ChangeNotifier {
 
         cartProduct.product = product;
 
-        final size = product.findSize(cartProduct.size);
-        if(size.stock - cartProduct.quantity < 0){
-          productsWithoutStock.add(product);
-        } else {
-          size.stock -= cartProduct.quantity;
-          productsToUpdate.add(product);
-        }
+        // final size = product.findSize(cartProduct.size);
+        // if(size.stock - cartProduct.quantity < 0){
+        //   productsWithoutStock.add(product);
+        // } else {
+        //   size.stock -= cartProduct.quantity;
+        //   productsToUpdate.add(product);
+        // }
       }
 
       if(productsWithoutStock.isNotEmpty){
@@ -102,10 +102,10 @@ class CheckoutManager extends ChangeNotifier {
             '${productsWithoutStock.length} produtos sem estoque');
       }
 
-      for(final product in productsToUpdate){
-        tx.update(firestore.doc('produtos/${product.id}'),
-            {'sizes': product.exportSizeList()});
-      }
+      // for(final product in productsToUpdate){
+      //   tx.update(firestore.doc('produtos/${product.id}'),
+      //       {'sizes': product.exportSizeList()});
+      // }
     });
   }
 

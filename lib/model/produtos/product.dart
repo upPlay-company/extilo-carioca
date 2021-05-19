@@ -14,8 +14,8 @@ class Product extends ChangeNotifier {
     name = document.data()['name'] as String;
     description = document.data()['description'] as String;
     img = List<String>.from(document.data()['img'] as List<dynamic>);
-    sizes = (document.data()['sizes'] as List<dynamic> ?? []).map((s)
-    => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
+    quantidade = document.data()['quantidade'];
+    price = document.data()['price'];
   }
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -24,9 +24,9 @@ class Product extends ChangeNotifier {
   DocumentReference get firestoreRef => firestore.doc('produtos/$id');
   get storageRef => storage.ref().child('produtos/$id');
 
-  String id, name, description;
+  String id, name, description, quantidade;
   List<String> img;
-  List<ItemSize> sizes;
+  num price;
 
   bool _loading = false;
   bool get loading => _loading;
@@ -42,41 +42,8 @@ class Product extends ChangeNotifier {
     notifyListeners();
   }
 
-  int get totalStock {
-    int stock = 0;
-    for(final size in sizes){
-      stock += size.stock;
-    }
-    return stock;
-  }
-
-  bool get hasStock {
-    return totalStock > 0;
-  }
-
-  num get basePrice {
-    num lowest = double.infinity;
-    for(final size in sizes){
-      if(size.price < lowest && size.hasStock)
-        lowest = size.price;
-    }
-    return lowest;
-  }
-
-  ItemSize findSize(String name){
-    try {
-      return sizes.firstWhere((s) => s.name == name);
-    } catch (e){
-      return null;
-    }
-  }
-
-  List<Map<String, dynamic>> exportSizeList(){
-    return sizes.map((size) => size.toMap()).toList();
-  }
-
   @override
   String toString() {
-    return 'Product{id: $id, name: $name, description: $description, img: $img, sizes: $sizes}';
+    return 'Product{id: $id, name: $name, description: $description, quantidade: $quantidade, img: $img, price: $price}';
   }
 }

@@ -25,7 +25,7 @@ class OrderProducts {
   Future<void> save() async {
     firestore.collection('orders').doc(orderId).set(
         {
-          'items': items.map((e) => e.toOrderItemMap()).toList(),
+          // 'items': items.map((e) => e.toOrderItemMap()).toList(),
           'price': price,
           'user': userId,
         }

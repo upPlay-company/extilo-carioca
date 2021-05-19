@@ -43,16 +43,16 @@ class OrderProductTile extends StatelessWidget {
                       fontWeight: FontWeight.w300,
                     ),
                   ),
-                  Text(
-                    'R\$ ${(cartProduct.fixedPrice ??
-                        cartProduct.unitPrice)
-                        .toStringAsFixed(2)}',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 14
-                    ),
-                  ),
+                  // Text(
+                  //   'R\$ ${(cartProduct.fixedPrice ??
+                  //       cartProduct.unitPrice)
+                  //       .toStringAsFixed(2)}',
+                  //   style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       color: Colors.black,
+                  //       fontSize: 14
+                  //   ),
+                  // ),
                 ],
               ),
             ),

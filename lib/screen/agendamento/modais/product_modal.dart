@@ -85,7 +85,7 @@ class ProductModal extends StatelessWidget {
                                     height: 10,
                                   ),
                                   Text(
-                                    'R\$${servProduct.basePrice.toStringAsFixed(2)}',
+                                    'R\$${servProduct.price.toStringAsFixed(2)}',
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,

@@ -28,20 +28,20 @@ class CustomDrawer extends StatelessWidget {
                         title: 'Meus Agendamentos',
                         page: 1
                     ),
-                    DrawerTile(
-                        iconData: Icons.query_builder,
-                        title: 'Meus Pedidos',
-                        page: 2
-                    ),
+                    // DrawerTile(
+                    //     iconData: Icons.query_builder,
+                    //     title: 'Meus Pedidos',
+                    //     page: 2
+                    // ),
                     DrawerTile(
                         iconData: Icons.location_on,
                         title: 'Unidades',
-                        page: 3
+                        page: 2
                     ),
                     DrawerTile(
                         iconData: Icons.person_outline,
                         title: 'Minha Conta',
-                        page: 4
+                        page: 3
                     ),
                     SizedBox(height: 10,),
                     Divider(),

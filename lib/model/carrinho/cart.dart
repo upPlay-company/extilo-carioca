@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:extilo_carioca/model/produtos/item_size.dart';
 import 'package:extilo_carioca/model/produtos/product.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -52,17 +51,17 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  ItemSize get itemSize{
-    if(product == null) return null;
-    return product.findSize(size);
-  }
+  // ItemSize get itemSize{
+  //   if(product == null) return null;
+  //   return product.findSize(size);
+  // }
 
-  num get unitPrice {
-    if(product == null) return 0;
-    return itemSize?.price ?? 0;
-  }
+  // num get unitPrice {
+  //   if(product == null) return 0;
+  //   return itemSize?.price ?? 0;
+  // }
 
-  num get totalPrice => unitPrice * quantity;
+  // num get totalPrice => unitPrice * quantity;
 
   Map<String, dynamic> toCartItemMap(){
     return {
@@ -72,14 +71,14 @@ class Cart extends ChangeNotifier {
     };
   }
 
-  Map<String, dynamic> toOrderItemMap(){
-    return {
-      'pid' : productId,
-      'quantity' : quantity,
-      'size' : size,
-      'fixedPrice': fixedPrice ?? unitPrice,
-    };
-  }
+  // Map<String, dynamic> toOrderItemMap(){
+  //   return {
+  //     'pid' : productId,
+  //     'quantity' : quantity,
+  //     'size' : size,
+  //     'fixedPrice': fixedPrice ?? unitPrice,
+  //   };
+  // }
 
   void increment(){
     quantity++;

@@ -27,7 +27,7 @@ class UserUser extends ChangeNotifier {
 
   String id, name, email, password, datanasc, phone, confirmPassword, newPass;
   List<bool> _faithfulness;
-  int credito;
+  int credito = 0;
 
   List get faithfulness => _faithfulness;
 
@@ -49,7 +49,8 @@ class UserUser extends ChangeNotifier {
       'name': name,
       'email': email,
       'nascimento': datanasc,
-      'phone': phone
+      'phone': phone,
+      'credito': credito
     };
   }
 
