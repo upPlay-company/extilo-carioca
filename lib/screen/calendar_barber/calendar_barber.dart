@@ -45,6 +45,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
   FirebaseAuth auth = FirebaseAuth.instance;
   Color todayColor = accentColor;
   int indexColor;
+  int indexColor2;
   int weekDay;
   DateTime daySelected;
   int hourSelected;
@@ -53,8 +54,12 @@ class _CalendarBarberState extends State<CalendarBarber> {
   DateTime holiday;
   var daysWeek;
   var hours;
-  var minutos;
   var avalible = [];
+  var avalible2 = [];
+
+  var minutos;
+  int hourSele;
+  int minuSele;
 
   bool isHoliday = false;
 
@@ -94,9 +99,11 @@ class _CalendarBarberState extends State<CalendarBarber> {
       DateTime now = dateUtc(DateTime.now(), '-');
       if (daySelected.isBefore(now)) {
         EasyLoading.showError('Data anterior ao dia de Atual!');
-      } else if (daySelected.day < DateTime.now().day && hourSelected < DateTime.now().hour) {
+      } else if (hourSelected < DateTime
+          .now()
+          .hour) {
         EasyLoading.showError('Selecione um horário maior que a hora atual');
-      } else if(hourSelected != null) {
+      } else if (hourSelected != null) {
         easyLoading();
         var isEmpty = await _confirmIsEmpty();
 
@@ -134,7 +141,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _getConfigs() async {
-    var res = await db.collection('configurations').doc('config').get();
+    var res = await db.collection('configurations').doc('config_hours').get();
     setState(() {
       daysWeek = res.data()['daysWeek'];
       hours = res.data()['hours'];
@@ -143,9 +150,9 @@ class _CalendarBarberState extends State<CalendarBarber> {
 
   _getConfigsMinutos() async {
     var res = await db.collection('configurations').doc('config_minutos').get();
+
     setState(() {
       minutos = res.data()['minutos'];
-      print(minutos);
     });
   }
 
@@ -175,10 +182,19 @@ class _CalendarBarberState extends State<CalendarBarber> {
         .get();
     List<DocumentSnapshot> documentsSnapshots = res.docs.toList();
     documentsSnapshots.asMap().forEach((index, e) {
+      int minu = e['minutos'];
 
+      if (minu == 0) {
+        hours[e['hour']] = false;
+      }
+
+      if (minu == 3) {
+        minutos[e['hour']] = false;
+      }
     });
     setState(() {
       avalible = hours;
+      avalible2 = minutos;
     });
     Future.delayed(Duration(seconds: 1), () {
       EasyLoading.dismiss();
@@ -220,8 +236,14 @@ class _CalendarBarberState extends State<CalendarBarber> {
           centerTitle: true,
         ),
         body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height,
           color: Colors.transparent,
           child: SlidingSheet(
             minHeight: 50,
@@ -239,7 +261,8 @@ class _CalendarBarberState extends State<CalendarBarber> {
               if (isHoliday == true) {
                 return Center(
                   child: Text('Não Abriremos nessa data',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    style: TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),),
                 );
               } else {
                 return _bodySliding();
@@ -252,6 +275,7 @@ class _CalendarBarberState extends State<CalendarBarber> {
   }
 
   _bodySliding() {
+    DateTime now = dateUtc(DateTime.now(), '-');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -266,8 +290,48 @@ class _CalendarBarberState extends State<CalendarBarber> {
                   return Center(
                     child: Text('horarios indisponivies'),
                   );
-                } else if (avalible[index]['bool'] == true) {
+                } else if (avalible[index] == true && index > DateTime
+                    .now()
+                    .hour
+                    && daySelected.day == DateTime
+                        .now()
+                        .day
+                    && daySelected.month == DateTime
+                        .now()
+                        .month) {
                   return _listTile(enable: true, index: index);
+                } else
+                if (avalible[index] == true && daySelected.isAfter(now)) {
+                  return _listTile(enable: true, index: index);
+                } else {
+                  return SizedBox();
+                }
+              },
+            ),
+          ),
+          Container(
+            height: 50,
+            child: ListView.builder(
+              itemCount: avalible2.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                if (avalible2 == null) {
+                  return Center(
+                    child: Text('horarios indisponivies'),
+                  );
+                } else if (avalible2[index] == true && index > DateTime
+                    .now()
+                    .hour
+                    && daySelected.day == DateTime
+                        .now()
+                        .day
+                    && daySelected.month == DateTime
+                        .now()
+                        .month) {
+                  return _listTile2(enable: true, index: index);
+                } else
+                if (avalible2[index] == true && daySelected.isAfter(now)) {
+                  return _listTile2(enable: true, index: index);
                 } else {
                   return SizedBox();
                 }
@@ -312,7 +376,9 @@ class _CalendarBarberState extends State<CalendarBarber> {
             weekendStyle: TextStyle(color: Colors.black),
             weekdayStyle: TextStyle(color: Colors.black)),
         calendarStyle: CalendarStyle(
-          selectedColor: Theme.of(context).primaryColor,
+          selectedColor: Theme
+              .of(context)
+              .primaryColor,
           todayColor: todayColor,
           weekdayStyle: TextStyle(color: Colors.black),
           weekendStyle: TextStyle(color: Colors.black),
@@ -340,20 +406,22 @@ class _CalendarBarberState extends State<CalendarBarber> {
     bool enable,
   }) {
     return Card(
-        color: indexColor == index ? Theme.of(context).primaryColor : Colors.white,
+        color: indexColor == index ? Theme
+            .of(context)
+            .primaryColor : Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () async {
               setState(() {
-                hourSelected = avalible[index]['hour'];
-                minutosSelected = avalible[index]['minutos'];
+                hourSelected = index;
+                minutosSelected = 0;
                 indexColor = index;
               });
             },
             child: Center(
               child: Text(
-                '${avalible[index]['hour']}:${avalible[index]['minutos']}0',
+                '$index:00',
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -362,6 +430,35 @@ class _CalendarBarberState extends State<CalendarBarber> {
           ),
         ));
   }
+
+  Widget _listTile2({
+    int index,
+    bool enable,
+  }) {
+    return Card(
+        color: indexColor2 == index ? Theme.of(context).primaryColor : Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+            onTap: () async {
+              setState(() {
+                hourSelected = index;
+                minutosSelected = 3;
+                indexColor2 = index;
+              });
+            },
+            child: Center(
+              child: Text(
+                '$index:30',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        ));
+  }
+
 
   Widget _headerSlide() {
     return Material(
