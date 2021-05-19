@@ -88,7 +88,7 @@ class CustomDrawer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text('v. 1.0.1',
+                          Text('v. 1.0.1+4',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Pricipal',
